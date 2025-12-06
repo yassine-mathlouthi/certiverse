@@ -52,9 +52,10 @@ function VerifyCertificate({ onBack, initialCertId }) {
   };
 
   const handleVerify = async (idToVerify = null) => {
+    // S'assurer que targetId est une chaîne de caractères
     const targetId = idToVerify || certId;
     
-    if (!targetId || targetId.trim() === '') {
+    if (!targetId || (typeof targetId === 'string' && targetId.trim() === '')) {
       setError('Veuillez entrer un ID de certificat');
       return;
     }
@@ -63,10 +64,11 @@ function VerifyCertificate({ onBack, initialCertId }) {
     setError('');
     setNotFound(false);
     setCertificate(null);
+    setHtmlContent(''); // Réinitialiser le contenu HTML
 
     try {
       // Extraire le numéro de l'ID (supporte "14" ou "CERT-2025-0014")
-      let numericId = targetId.trim();
+      let numericId = String(targetId).trim();
       
       // Si le format est CERT-YYYY-NNNN, extraire juste le nombre à la fin
       const certFormatMatch = numericId.match(/CERT-\d{4}-(\d+)/i);
@@ -213,40 +215,7 @@ function VerifyCertificate({ onBack, initialCertId }) {
             </p>
           </div>
         )}
-        {/* Affichage du certificat directement dans l'interface */}
-            {certificate.ipfsHash && (
-              <div className="border-t border-gray-200">
-                <div className="bg-gradient-to-r from-blue-50 to-cyan-50 px-8 py-4">
-                  <h3 className="text-lg font-bold text-gray-900 flex items-center space-x-2">
-                    <FileText className="w-5 h-5 text-blue-600" />
-                    <span>Aperçu du certificat</span>
-                  </h3>
-                </div>
-                <div className="bg-gray-50 p-4">
-                  {loadingCertificate ? (
-                    <div className="flex flex-col items-center justify-center py-20">
-                      <div className="animate-spin rounded-full h-14 w-14 border-4 border-blue-600 border-t-transparent mb-4"></div>
-                      <p className="text-gray-600 font-medium">Chargement du certificat depuis IPFS...</p>
-                    </div>
-                  ) : htmlContent ? (
-                    <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-                      <iframe
-                        srcDoc={htmlContent}
-                        title={`Certificat ${certificate.id}`}
-                        className="w-full border-0 bg-white"
-                        style={{ height: '800px' }}
-                        sandbox="allow-scripts allow-same-origin"
-                      />
-                    </div>
-                  ) : (
-                    <div className="text-center py-12 text-gray-500">
-                      <AlertCircle className="w-12 h-12 mx-auto mb-4 text-gray-400" />
-                      <p>Impossible de charger le certificat</p>
-                    </div>
-                  )}
-                </div>
-              </div>
-            )}
+
         {certificate && (
           <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
             <div className={`p-6 ${certificate.revoked ? 'bg-red-50' : 'bg-green-50'}`}>
@@ -355,7 +324,40 @@ function VerifyCertificate({ onBack, initialCertId }) {
               </div>
             </div>
 
-            
+            {/* Affichage du certificat directement dans l'interface */}
+            {certificate.ipfsHash && (
+              <div className="border-t border-gray-200">
+                <div className="bg-gradient-to-r from-blue-50 to-cyan-50 px-8 py-4">
+                  <h3 className="text-lg font-bold text-gray-900 flex items-center space-x-2">
+                    <FileText className="w-5 h-5 text-blue-600" />
+                    <span>Aperçu du certificat</span>
+                  </h3>
+                </div>
+                <div className="bg-gray-50 p-4">
+                  {loadingCertificate ? (
+                    <div className="flex flex-col items-center justify-center py-20">
+                      <div className="animate-spin rounded-full h-14 w-14 border-4 border-blue-600 border-t-transparent mb-4"></div>
+                      <p className="text-gray-600 font-medium">Chargement du certificat depuis IPFS...</p>
+                    </div>
+                  ) : htmlContent ? (
+                    <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+                      <iframe
+                        srcDoc={htmlContent}
+                        title={`Certificat ${certificate.id}`}
+                        className="w-full border-0 bg-white"
+                        style={{ height: '800px' }}
+                        sandbox="allow-scripts allow-same-origin"
+                      />
+                    </div>
+                  ) : (
+                    <div className="text-center py-12 text-gray-500">
+                      <AlertCircle className="w-12 h-12 mx-auto mb-4 text-gray-400" />
+                      <p>Impossible de charger le certificat</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
         )}
 

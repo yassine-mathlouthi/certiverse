@@ -3,17 +3,33 @@ import { Web3Provider, useWeb3 } from './context/Web3Context';
 import HomePage from './pages/HomePage';
 import AdminDashboard from './pages/AdminDashboard';
 import OrganizationDashboard from './pages/OrganizationDashboard';
-import { useEffect } from 'react';
+import VerifyCertificate from './pages/VerifyCertificate';
+import { useEffect, useState } from 'react';
+import { getCertIdFromUrl } from './utils/urlUtils';
 
 function AppContent() {
   const { account, isAdmin, isRegisteredOrg, orgData, loading, connectWallet, disconnect } = useWeb3();
+  const [showVerifyPage, setShowVerifyPage] = useState(false);
+  const [initialCertId, setInitialCertId] = useState(null);
 
   useEffect(() => {
+    // Vérifier si un certificat est demandé via URL (QR code)
+    const certId = getCertIdFromUrl();
+    if (certId) {
+      setInitialCertId(certId);
+      setShowVerifyPage(true);
+    }
+    
     // Optionnel : auto-connect si déjà connecté
     if (window.ethereum?.selectedAddress) {
       connectWallet();
     }
   }, []);
+
+  // Afficher la page de vérification
+  if (showVerifyPage) {
+    return <VerifyCertificate onBack={() => setShowVerifyPage(false)} initialCertId={initialCertId} />;
+  }
 
   if (loading) {
     return (
@@ -24,7 +40,7 @@ function AppContent() {
   }
 
   if (!account) {
-    return <HomePage onConnectWallet={connectWallet} />;
+    return <HomePage onConnectWallet={connectWallet} onVerifyCertificate={() => setShowVerifyPage(true)} />;
   }
 
   if (isAdmin) {

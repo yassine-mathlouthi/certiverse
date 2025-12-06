@@ -33,7 +33,8 @@ export const initContract = async () => {
 
 // Obtenir une instance en lecture seule (sans signer)
 export const getContractReadOnly = () => {
-  const stableProvider = new ethers.JsonRpcProvider("https://rpc.ankr.com/eth_sepolia");
+  // Utiliser une URL RPC publique Sepolia fiable
+  const stableProvider = new ethers.JsonRpcProvider("https://ethereum-sepolia-rpc.publicnode.com");
   return new ethers.Contract(CONTRACT_ADDRESS, CONTRACT_ABI, stableProvider);
 };
 export { contract, provider };

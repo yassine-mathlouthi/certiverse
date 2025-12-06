@@ -364,8 +364,14 @@ function VerifyCertificate({ onBack, initialCertId }) {
                       <span className="text-sm font-medium text-gray-500">Formation</span>
                     </div>
                     <p className="text-lg font-semibold text-gray-900">{certificate.formationName}</p>
-                    
-                    <p className="text-sm text-gray-600">{certificate.certType}</p>
+                  </div>
+
+                  <div>
+                    <div className="flex items-center space-x-2 mb-2">
+                      <Shield className="w-5 h-5 text-blue-600" />
+                      <span className="text-sm font-medium text-gray-500">Type de certification</span>
+                    </div>
+                    <p className="text-lg font-semibold text-gray-900">{certificate.certType}</p>
                   </div>
 
                   <div>

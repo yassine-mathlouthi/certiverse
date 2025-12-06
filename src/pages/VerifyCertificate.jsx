@@ -9,6 +9,8 @@ function VerifyCertificate({ onBack, initialCertId }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [notFound, setNotFound] = useState(false);
+  const [htmlContent, setHtmlContent] = useState('');
+  const [loadingCertificate, setLoadingCertificate] = useState(false);
 
   // Vérifier automatiquement si un ID initial est fourni (via QR code)
   useEffect(() => {
@@ -20,6 +22,34 @@ function VerifyCertificate({ onBack, initialCertId }) {
       }, 100);
     }
   }, [initialCertId]);
+
+  // Fonction pour charger le certificat depuis IPFS
+  const loadCertificateFromIPFS = async (ipfsHash) => {
+    try {
+      setLoadingCertificate(true);
+      const cid = ipfsHash.replace('ipfs://', '');
+      const gateway = import.meta.env.VITE_PINATA_GATEWAY;
+      const response = await fetch(`https://${gateway}/ipfs/${cid}`);
+      if (!response.ok) throw new Error(`Erreur HTTP ${response.status}`);
+      
+      let content = await response.text();
+      
+      // Améliorer le style pour l'affichage intégré
+      const styledContent = content.replace(
+        '</head>',
+        `<style>
+          body { background: white !important; }
+          .certificate { box-shadow: none !important; }
+        </style></head>`
+      );
+      
+      setHtmlContent(styledContent);
+    } catch (err) {
+      console.error('Erreur chargement IPFS:', err);
+    } finally {
+      setLoadingCertificate(false);
+    }
+  };
 
   const handleVerify = async (idToVerify = null) => {
     const targetId = idToVerify || certId;
@@ -75,6 +105,11 @@ function VerifyCertificate({ onBack, initialCertId }) {
           : 'Date non disponible',
         revoked: cert.revoked || false
       });
+
+      // Charger automatiquement le certificat depuis IPFS
+      if (cert.ipfsHash) {
+        loadCertificateFromIPFS(cert.ipfsHash);
+      }
     } catch (err) {
       if (err.message && err.message.includes('network')) {
         setError('Erreur de connexion au réseau blockchain. Vérifiez votre connexion Internet.');
@@ -178,7 +213,40 @@ function VerifyCertificate({ onBack, initialCertId }) {
             </p>
           </div>
         )}
-
+        {/* Affichage du certificat directement dans l'interface */}
+            {certificate.ipfsHash && (
+              <div className="border-t border-gray-200">
+                <div className="bg-gradient-to-r from-blue-50 to-cyan-50 px-8 py-4">
+                  <h3 className="text-lg font-bold text-gray-900 flex items-center space-x-2">
+                    <FileText className="w-5 h-5 text-blue-600" />
+                    <span>Aperçu du certificat</span>
+                  </h3>
+                </div>
+                <div className="bg-gray-50 p-4">
+                  {loadingCertificate ? (
+                    <div className="flex flex-col items-center justify-center py-20">
+                      <div className="animate-spin rounded-full h-14 w-14 border-4 border-blue-600 border-t-transparent mb-4"></div>
+                      <p className="text-gray-600 font-medium">Chargement du certificat depuis IPFS...</p>
+                    </div>
+                  ) : htmlContent ? (
+                    <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+                      <iframe
+                        srcDoc={htmlContent}
+                        title={`Certificat ${certificate.id}`}
+                        className="w-full border-0 bg-white"
+                        style={{ height: '800px' }}
+                        sandbox="allow-scripts allow-same-origin"
+                      />
+                    </div>
+                  ) : (
+                    <div className="text-center py-12 text-gray-500">
+                      <AlertCircle className="w-12 h-12 mx-auto mb-4 text-gray-400" />
+                      <p>Impossible de charger le certificat</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
         {certificate && (
           <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
             <div className={`p-6 ${certificate.revoked ? 'bg-red-50' : 'bg-green-50'}`}>
@@ -253,29 +321,41 @@ function VerifyCertificate({ onBack, initialCertId }) {
                   <Shield className="w-5 h-5 text-blue-600" />
                   <span className="text-sm font-medium text-gray-500">Hash IPFS</span>
                 </div>
-                <div className="bg-gray-50 p-3 rounded-lg">
-                  <p className="text-sm font-mono text-gray-700 break-all">{certificate.ipfsHash}</p>
+                <div className="bg-gray-50 p-3 rounded-lg hover:bg-gray-100 transition-colors">
+                  <a
+                    href={`https://${import.meta.env.VITE_PINATA_GATEWAY}/ipfs/${certificate.ipfsHash.replace('ipfs://', '')}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm font-mono text-blue-600 hover:text-blue-800 hover:underline break-all flex items-center space-x-2"
+                  >
+                    <span>{certificate.ipfsHash}</span>
+                    <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </a>
                 </div>
                 {certificate.ipfsHash && (
                   <div className="mt-4 flex flex-wrap gap-3">
                     <button
-                      onClick={() => viewCertificate(certificate.ipfsHash)}
+                      onClick={() => downloadCertificate(certificate.ipfsHash, certificate.id)}
                       className="flex-1 min-w-[200px] inline-flex items-center justify-center space-x-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-cyan-600 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200"
                     >
-                      <Eye className="w-5 h-5" />
-                      <span>Voir le certificat</span>
+                      <Download className="w-5 h-5" />
+                      <span>Télécharger le certificat</span>
                     </button>
                     <button
-                      onClick={() => downloadCertificate(certificate.ipfsHash, certificate.id)}
+                      onClick={() => viewCertificate(certificate.ipfsHash)}
                       className="flex-1 min-w-[200px] inline-flex items-center justify-center space-x-2 px-6 py-3 bg-white text-blue-600 border-2 border-blue-600 rounded-xl font-semibold hover:bg-blue-50 transform hover:-translate-y-1 transition-all duration-200"
                     >
-                      <Download className="w-5 h-5" />
-                      <span>Télécharger</span>
+                      <Eye className="w-5 h-5" />
+                      <span>Ouvrir dans un nouvel onglet</span>
                     </button>
                   </div>
                 )}
               </div>
             </div>
+
+            
           </div>
         )}
 

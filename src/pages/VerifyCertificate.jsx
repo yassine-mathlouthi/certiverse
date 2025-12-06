@@ -242,7 +242,42 @@ function VerifyCertificate({ onBack, initialCertId }) {
               </div>
             </div>
 
-            <div className="p-8">
+            {/* Affichage du certificat directement dans l'interface */}
+            {certificate.ipfsHash && (
+              <div className="border-t border-gray-200">
+                <div className="bg-gradient-to-r from-blue-50 to-cyan-50 px-8 py-4">
+                  <h3 className="text-lg font-bold text-gray-900 flex items-center space-x-2">
+                    <FileText className="w-5 h-5 text-blue-600" />
+                    <span>Aperçu du certificat</span>
+                  </h3>
+                </div>
+                <div className="bg-gray-50 p-4">
+                  {loadingCertificate ? (
+                    <div className="flex flex-col items-center justify-center py-20">
+                      <div className="animate-spin rounded-full h-14 w-14 border-4 border-blue-600 border-t-transparent mb-4"></div>
+                      <p className="text-gray-600 font-medium">Chargement du certificat depuis IPFS...</p>
+                    </div>
+                  ) : htmlContent ? (
+                    <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+                      <iframe
+                        srcDoc={htmlContent}
+                        title={`Certificat ${certificate.id}`}
+                        className="w-full border-0 bg-white"
+                        style={{ height: '800px' }}
+                        sandbox="allow-scripts allow-same-origin"
+                      />
+                    </div>
+                  ) : (
+                    <div className="text-center py-12 text-gray-500">
+                      <AlertCircle className="w-12 h-12 mx-auto mb-4 text-gray-400" />
+                      <p>Impossible de charger le certificat</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
+            <div className="p-8 border-t border-gray-200">
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-4">
                   <div>
@@ -324,40 +359,7 @@ function VerifyCertificate({ onBack, initialCertId }) {
               </div>
             </div>
 
-            {/* Affichage du certificat directement dans l'interface */}
-            {certificate.ipfsHash && (
-              <div className="border-t border-gray-200">
-                <div className="bg-gradient-to-r from-blue-50 to-cyan-50 px-8 py-4">
-                  <h3 className="text-lg font-bold text-gray-900 flex items-center space-x-2">
-                    <FileText className="w-5 h-5 text-blue-600" />
-                    <span>Aperçu du certificat</span>
-                  </h3>
-                </div>
-                <div className="bg-gray-50 p-4">
-                  {loadingCertificate ? (
-                    <div className="flex flex-col items-center justify-center py-20">
-                      <div className="animate-spin rounded-full h-14 w-14 border-4 border-blue-600 border-t-transparent mb-4"></div>
-                      <p className="text-gray-600 font-medium">Chargement du certificat depuis IPFS...</p>
-                    </div>
-                  ) : htmlContent ? (
-                    <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-                      <iframe
-                        srcDoc={htmlContent}
-                        title={`Certificat ${certificate.id}`}
-                        className="w-full border-0 bg-white"
-                        style={{ height: '800px' }}
-                        sandbox="allow-scripts allow-same-origin"
-                      />
-                    </div>
-                  ) : (
-                    <div className="text-center py-12 text-gray-500">
-                      <AlertCircle className="w-12 h-12 mx-auto mb-4 text-gray-400" />
-                      <p>Impossible de charger le certificat</p>
-                    </div>
-                  )}
-                </div>
-              </div>
-            )}
+            
           </div>
         )}
 

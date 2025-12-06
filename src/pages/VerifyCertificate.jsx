@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Shield, Search, CheckCircle, XCircle, AlertCircle, ArrowLeft, FileText, Calendar, User, Building2, Download, Eye } from 'lucide-react';
+import { Shield, Search, CheckCircle, XCircle, AlertCircle, ArrowLeft, FileText, Calendar, User, Building2, Download, Eye, Copy, ExternalLink } from 'lucide-react';
 import { getContractReadOnly } from '../utils/contract';
 import { downloadCertificate, viewCertificate } from '../utils/certificateUtils';
 
@@ -11,6 +11,7 @@ function VerifyCertificate({ onBack, initialCertId }) {
   const [notFound, setNotFound] = useState(false);
   const [htmlContent, setHtmlContent] = useState('');
   const [loadingCertificate, setLoadingCertificate] = useState(false);
+  const [copiedField, setCopiedField] = useState('');
 
   // Vérifier automatiquement si un ID initial est fourni (via QR code)
   useEffect(() => {
@@ -22,6 +23,17 @@ function VerifyCertificate({ onBack, initialCertId }) {
       }, 100);
     }
   }, [initialCertId]);
+
+  // Fonction pour copier dans le presse-papier
+  const copyToClipboard = async (text, fieldName) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopiedField(fieldName);
+      setTimeout(() => setCopiedField(''), 2000);
+    } catch (err) {
+      console.error('Erreur lors de la copie:', err);
+    }
+  };
 
   // Fonction pour charger le certificat depuis IPFS
   const loadCertificateFromIPFS = async (ipfsHash) => {
@@ -51,9 +63,9 @@ function VerifyCertificate({ onBack, initialCertId }) {
     }
   };
 
-  const handleVerify = async (idToVerify = null) => {
+  const handleVerify = async (idToVerify) => {
     // S'assurer que targetId est une chaîne de caractères
-    const targetId = idToVerify || certId;
+    const targetId = idToVerify !== undefined ? idToVerify : certId;
     
     if (!targetId || (typeof targetId === 'string' && targetId.trim() === '')) {
       setError('Veuillez entrer un ID de certificat');
@@ -179,12 +191,12 @@ function VerifyCertificate({ onBack, initialCertId }) {
                 onChange={(e) => setCertId(e.target.value)}
                 placeholder="Ex: 14 ou CERT-2025-0014"
                 className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-blue-600 focus:outline-none transition-colors"
-                onKeyPress={(e) => e.key === 'Enter' && handleVerify()}
+                onKeyPress={(e) => { if (e.key === 'Enter') handleVerify(); }}
               />
             </div>
             <div className="sm:pt-7">
               <button
-                onClick={handleVerify}
+                onClick={() => handleVerify()}
                 disabled={loading}
                 className="w-full sm:w-auto px-8 py-3 bg-gradient-to-r from-blue-600 to-cyan-600 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center space-x-2"
               >
@@ -235,14 +247,26 @@ function VerifyCertificate({ onBack, initialCertId }) {
                     </p>
                   </div>
                 </div>
-                <div className="bg-white px-4 py-2 rounded-lg">
-                  <span className="text-sm font-medium text-gray-600">ID:</span>
-                  <span className="ml-2 text-lg font-bold text-gray-900">#{certificate.id}</span>
+                <div className="flex items-center space-x-4">
+                  <div className="bg-white px-4 py-2 rounded-lg">
+                    <span className="text-sm font-medium text-gray-600">ID:</span>
+                    <span className="ml-2 text-lg font-bold text-gray-900">#{certificate.id}</span>
+                  </div>
+                  <a
+                    href={`https://sepolia.etherscan.io/address/0xe6F2C948A7Ae5F28C8DFc7DEe81b113f6fE33904`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center space-x-2 px-4 py-2 bg-white text-blue-600 rounded-lg hover:bg-blue-50 transition-colors"
+                    title="Voir sur Etherscan"
+                  >
+                    <ExternalLink className="w-5 h-5" />
+                    <span className="text-sm font-medium">Etherscan</span>
+                  </a>
                 </div>
               </div>
             </div>
 
-            {/* Affichage du certificat directement dans l'interface */}
+            {/* Affichage du certificat directement dans l'interface - AVANT les détails */}
             {certificate.ipfsHash && (
               <div className="border-t border-gray-200">
                 <div className="bg-gradient-to-r from-blue-50 to-cyan-50 px-8 py-4">
@@ -277,7 +301,14 @@ function VerifyCertificate({ onBack, initialCertId }) {
               </div>
             )}
 
+            {/* Détails du certificat */}
             <div className="p-8 border-t border-gray-200">
+              <div className="bg-gradient-to-r from-blue-50 to-cyan-50 px-6 py-3 -mx-8 -mt-8 mb-6">
+                <h3 className="text-lg font-bold text-gray-900 flex items-center space-x-2">
+                  <Shield className="w-5 h-5 text-blue-600" />
+                  <span>Détails du certificat</span>
+                </h3>
+              </div>
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-4">
                   <div>
@@ -287,7 +318,20 @@ function VerifyCertificate({ onBack, initialCertId }) {
                     </div>
                     <p className="text-lg font-semibold text-gray-900">{certificate.studentName}</p>
                     <p className="text-sm text-gray-600">{certificate.studentEmail}</p>
-                    <p className="text-xs text-gray-400 font-mono break-all">{certificate.student}</p>
+                    <div className="flex items-center space-x-2 group">
+                      <p className="text-xs text-gray-400 font-mono break-all flex-1">{certificate.student}</p>
+                      <button
+                        onClick={() => copyToClipboard(certificate.student, 'student')}
+                        className="opacity-0 group-hover:opacity-100 transition-opacity p-1 hover:bg-gray-100 rounded"
+                        title="Copier l'adresse"
+                      >
+                        {copiedField === 'student' ? (
+                          <CheckCircle className="w-4 h-4 text-green-600" />
+                        ) : (
+                          <Copy className="w-4 h-4 text-gray-500" />
+                        )}
+                      </button>
+                    </div>
                   </div>
 
                   <div>
@@ -296,7 +340,20 @@ function VerifyCertificate({ onBack, initialCertId }) {
                       <span className="text-sm font-medium text-gray-500">Organisation émettrice</span>
                     </div>
                     <p className="text-lg font-semibold text-gray-900">{certificate.issuerName}</p>
-                    <p className="text-xs text-gray-400 font-mono break-all">{certificate.issuer}</p>
+                    <div className="flex items-center space-x-2 group">
+                      <p className="text-xs text-gray-400 font-mono break-all flex-1">{certificate.issuer}</p>
+                      <button
+                        onClick={() => copyToClipboard(certificate.issuer, 'issuer')}
+                        className="opacity-0 group-hover:opacity-100 transition-opacity p-1 hover:bg-gray-100 rounded"
+                        title="Copier l'adresse"
+                      >
+                        {copiedField === 'issuer' ? (
+                          <CheckCircle className="w-4 h-4 text-green-600" />
+                        ) : (
+                          <Copy className="w-4 h-4 text-gray-500" />
+                        )}
+                      </button>
+                    </div>
                   </div>
                 </div>
 
@@ -307,6 +364,7 @@ function VerifyCertificate({ onBack, initialCertId }) {
                       <span className="text-sm font-medium text-gray-500">Formation</span>
                     </div>
                     <p className="text-lg font-semibold text-gray-900">{certificate.formationName}</p>
+                    
                     <p className="text-sm text-gray-600">{certificate.certType}</p>
                   </div>
 
@@ -325,34 +383,38 @@ function VerifyCertificate({ onBack, initialCertId }) {
                   <Shield className="w-5 h-5 text-blue-600" />
                   <span className="text-sm font-medium text-gray-500">Hash IPFS</span>
                 </div>
-                <div className="bg-gray-50 p-3 rounded-lg hover:bg-gray-100 transition-colors">
-                  <a
-                    href={`https://${import.meta.env.VITE_PINATA_GATEWAY}/ipfs/${certificate.ipfsHash.replace('ipfs://', '')}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm font-mono text-blue-600 hover:text-blue-800 hover:underline break-all flex items-center space-x-2"
-                  >
-                    <span>{certificate.ipfsHash}</span>
-                    <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                    </svg>
-                  </a>
+                <div className="bg-gray-50 p-3 rounded-lg hover:bg-gray-100 transition-colors group">
+                  <div className="flex items-center space-x-2">
+                    <a
+                      href={`https://${import.meta.env.VITE_PINATA_GATEWAY}/ipfs/${certificate.ipfsHash.replace('ipfs://', '')}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm font-mono text-blue-600 hover:text-blue-800 hover:underline break-all flex items-center space-x-2 flex-1"
+                    >
+                      <span>{certificate.ipfsHash}</span>
+                      <ExternalLink className="w-4 h-4 flex-shrink-0" />
+                    </a>
+                    <button
+                      onClick={() => copyToClipboard(certificate.ipfsHash, 'ipfs')}
+                      className="opacity-0 group-hover:opacity-100 transition-opacity p-2 hover:bg-white rounded"
+                      title="Copier le hash IPFS"
+                    >
+                      {copiedField === 'ipfs' ? (
+                        <CheckCircle className="w-5 h-5 text-green-600" />
+                      ) : (
+                        <Copy className="w-5 h-5 text-gray-500" />
+                      )}
+                    </button>
+                  </div>
                 </div>
                 {certificate.ipfsHash && (
-                  <div className="mt-4 flex flex-wrap gap-3">
+                  <div className="mt-4">
                     <button
                       onClick={() => downloadCertificate(certificate.ipfsHash, certificate.id)}
-                      className="flex-1 min-w-[200px] inline-flex items-center justify-center space-x-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-cyan-600 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200"
+                      className="w-full inline-flex items-center justify-center space-x-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-cyan-600 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200"
                     >
                       <Download className="w-5 h-5" />
                       <span>Télécharger le certificat</span>
-                    </button>
-                    <button
-                      onClick={() => viewCertificate(certificate.ipfsHash)}
-                      className="flex-1 min-w-[200px] inline-flex items-center justify-center space-x-2 px-6 py-3 bg-white text-blue-600 border-2 border-blue-600 rounded-xl font-semibold hover:bg-blue-50 transform hover:-translate-y-1 transition-all duration-200"
-                    >
-                      <Eye className="w-5 h-5" />
-                      <span>Ouvrir dans un nouvel onglet</span>
                     </button>
                   </div>
                 )}

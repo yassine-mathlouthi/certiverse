@@ -147,6 +147,18 @@ export default function StudentDashboard({ studentAddress, onDisconnect, contrac
   const [transactions, setTransactions] = useState([]);
   const [loadingTransactions, setLoadingTransactions] = useState(false);
   const [copiedTxHash, setCopiedTxHash] = useState('');
+  const [copiedVerifyId, setCopiedVerifyId] = useState(null);
+
+  // Base URL for verification
+  const VERIFY_BASE_URL = 'https://certiverse-six.vercel.app/verify';
+
+  const copyVerifyLink = (certId) => {
+    const verifyUrl = `${VERIFY_BASE_URL}/${certId}`;
+    navigator.clipboard.writeText(verifyUrl);
+    setCopiedVerifyId(certId);
+    toast.success('Lien de vérification copié !');
+    setTimeout(() => setCopiedVerifyId(null), 2000);
+  };
 
   const [stats, setStats] = useState({
     total: 0,
@@ -691,6 +703,34 @@ export default function StudentDashboard({ studentAddress, onDisconnect, contrac
                               <span className="text-gray-600 font-mono text-xs truncate">ID: {cert.id}</span>
                             </div>
 
+                            {/* Verification Chip */}
+                            <div className="flex items-center space-x-2 pt-2">
+                              <a
+                                href={`/verify/${cert.id}`}
+                                className="inline-flex items-center space-x-1.5 px-3 py-1.5 bg-gradient-to-r from-cyan-50 to-blue-50 hover:from-cyan-100 hover:to-blue-100 border border-cyan-200 hover:border-cyan-300 rounded-full text-cyan-700 text-xs font-medium transition-all group"
+                              >
+                                <ExternalLink className="w-3 h-3 group-hover:scale-110 transition-transform" />
+                                <span>Vérifier</span>
+                              </a>
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  copyVerifyLink(cert.id);
+                                }}
+                                className={`inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-all ${copiedVerifyId === cert.id
+                                    ? 'bg-green-100 border border-green-300 text-green-700'
+                                    : 'bg-gray-50 hover:bg-gray-100 border border-gray-200 hover:border-gray-300 text-gray-600'
+                                  }`}
+                                title="Copier le lien de vérification"
+                              >
+                                {copiedVerifyId === cert.id ? (
+                                  <><Check className="w-3 h-3" /><span>Copié</span></>
+                                ) : (
+                                  <><Copy className="w-3 h-3" /><span>Copier</span></>
+                                )}
+                              </button>
+                            </div>
+
                             <div className="pt-4 flex flex-col sm:flex-row gap-2">
                               <button
                                 onClick={() => handleViewCertificate(cert)}
@@ -767,6 +807,34 @@ export default function StudentDashboard({ studentAddress, onDisconnect, contrac
                             <div className="flex items-center space-x-3 text-sm">
                               <FileText className="w-4 h-4 text-gray-400 flex-shrink-0" />
                               <span className="text-gray-600 font-mono text-xs truncate">ID: {cert.id}</span>
+                            </div>
+
+                            {/* Verification Chip */}
+                            <div className="flex items-center space-x-2 pt-2">
+                              <a
+                                href={`/verify/${cert.id}`}
+                                className="inline-flex items-center space-x-1.5 px-3 py-1.5 bg-gradient-to-r from-cyan-50 to-blue-50 hover:from-cyan-100 hover:to-blue-100 border border-cyan-200 hover:border-cyan-300 rounded-full text-cyan-700 text-xs font-medium transition-all group"
+                              >
+                                <ExternalLink className="w-3 h-3 group-hover:scale-110 transition-transform" />
+                                <span>Vérifier</span>
+                              </a>
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  copyVerifyLink(cert.id);
+                                }}
+                                className={`inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-all ${copiedVerifyId === cert.id
+                                    ? 'bg-green-100 border border-green-300 text-green-700'
+                                    : 'bg-gray-50 hover:bg-gray-100 border border-gray-200 hover:border-gray-300 text-gray-600'
+                                  }`}
+                                title="Copier le lien de vérification"
+                              >
+                                {copiedVerifyId === cert.id ? (
+                                  <><Check className="w-3 h-3" /><span>Copié</span></>
+                                ) : (
+                                  <><Copy className="w-3 h-3" /><span>Copier</span></>
+                                )}
+                              </button>
                             </div>
 
                             <div className="pt-4 flex flex-col sm:flex-row gap-2">

@@ -7,7 +7,7 @@ import {
 } from 'lucide-react';
 import toast, { Toaster } from 'react-hot-toast';
 import { motion, AnimatePresence } from 'framer-motion';
-//test
+
 export default function AdminDashboard({ adminAddress, onDisconnect, contract }) {
   const [organizations, setOrganizations] = useState([]);
   const [stats, setStats] = useState({

@@ -487,7 +487,7 @@ export default function OrganizationDashboard({
       );
       await tx.wait();
 
-      const verifyUrl = `https://hls078n4-5173.euw.devtunnels.ms/verify/${finalCertId}`;
+      const verifyUrl = `https://certiverse-six.vercel.app/verify/${finalCertId}`;
       navigator.clipboard.writeText(verifyUrl);
 
       toast.success(`CERTIFICAT ÉMIS !\n\nID : ${finalCertId}\n\nLien copié :\n${verifyUrl}`, {

@@ -74,54 +74,54 @@ function OrganizationAnalytics({ certificates, contract }) {
 
     if (loading) {
         return (
-            <div className="bg-white rounded-xl shadow-lg border border-gray-100 p-8">
+            <div className="bg-white rounded-xl shadow-lg border border-gray-100 p-4 sm:p-8">
                 <div className="flex items-center justify-center">
-                    <div className="animate-spin rounded-full h-12 w-12 border-4 border-blue-600 border-t-transparent"></div>
-                    <span className="ml-4 text-gray-600">Chargement des analytics...</span>
+                    <div className="animate-spin rounded-full h-10 w-10 sm:h-12 sm:w-12 border-4 border-blue-600 border-t-transparent"></div>
+                    <span className="ml-3 sm:ml-4 text-sm sm:text-base text-gray-600">Chargement des analytics...</span>
                 </div>
             </div>
         );
     }
 
     return (
-        <div className="space-y-6">
+        <div className="space-y-4 sm:space-y-6">
             {/* Analytics Stats Cards */}
-            <div className="grid md:grid-cols-3 gap-6">
-                <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-6">
+                <div className="bg-white rounded-xl p-4 sm:p-6 shadow-lg border border-gray-100">
                     <div className="flex items-center justify-between">
                         <div>
-                            <p className="text-gray-500 text-sm font-medium mb-1">Total Gas Utilisé</p>
-                            <p className="text-3xl font-bold text-gray-900">{analytics.totalGasUsed}</p>
+                            <p className="text-gray-500 text-xs sm:text-sm font-medium mb-1">Total Gas Utilisé</p>
+                            <p className="text-2xl sm:text-3xl font-bold text-gray-900">{analytics.totalGasUsed}</p>
                             <p className="text-xs text-gray-400 mt-1">Unités de gas</p>
                         </div>
-                        <div className="bg-purple-100 p-3 rounded-xl">
-                            <Zap className="w-8 h-8 text-purple-600" />
+                        <div className="bg-purple-100 p-2 sm:p-3 rounded-xl">
+                            <Zap className="w-6 h-6 sm:w-8 sm:h-8 text-purple-600" />
                         </div>
                     </div>
                 </div>
 
-                <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100">
+                <div className="bg-white rounded-xl p-4 sm:p-6 shadow-lg border border-gray-100">
                     <div className="flex items-center justify-between">
                         <div>
-                            <p className="text-gray-500 text-sm font-medium mb-1">Coût Total</p>
-                            <p className="text-3xl font-bold text-gray-900">{analytics.totalGasCostETH}</p>
+                            <p className="text-gray-500 text-xs sm:text-sm font-medium mb-1">Coût Total</p>
+                            <p className="text-2xl sm:text-3xl font-bold text-gray-900">{analytics.totalGasCostETH}</p>
                             <p className="text-xs text-gray-400 mt-1">ETH</p>
                         </div>
-                        <div className="bg-green-100 p-3 rounded-xl">
-                            <DollarSign className="w-8 h-8 text-green-600" />
+                        <div className="bg-green-100 p-2 sm:p-3 rounded-xl">
+                            <DollarSign className="w-6 h-6 sm:w-8 sm:h-8 text-green-600" />
                         </div>
                     </div>
                 </div>
 
-                <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100">
+                <div className="bg-white rounded-xl p-4 sm:p-6 shadow-lg border border-gray-100">
                     <div className="flex items-center justify-between">
                         <div>
-                            <p className="text-gray-500 text-sm font-medium mb-1">Moy. Gas/Cert</p>
-                            <p className="text-3xl font-bold text-gray-900">{analytics.avgGasPerCert}</p>
+                            <p className="text-gray-500 text-xs sm:text-sm font-medium mb-1">Moy. Gas/Cert</p>
+                            <p className="text-2xl sm:text-3xl font-bold text-gray-900">{analytics.avgGasPerCert}</p>
                             <p className="text-xs text-gray-400 mt-1">Gas par certificat</p>
                         </div>
-                        <div className="bg-blue-100 p-3 rounded-xl">
-                            <TrendingUp className="w-8 h-8 text-blue-600" />
+                        <div className="bg-blue-100 p-2 sm:p-3 rounded-xl">
+                            <TrendingUp className="w-6 h-6 sm:w-8 sm:h-8 text-blue-600" />
                         </div>
                     </div>
                 </div>
@@ -130,15 +130,15 @@ function OrganizationAnalytics({ certificates, contract }) {
             {/* Recent Transactions Table */}
             {analytics.recentTransactions.length > 0 && (
                 <div className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden">
-                    <div className="p-6 border-b border-gray-200">
+                    <div className="p-4 sm:p-6 border-b border-gray-200">
                         <div className="flex items-center space-x-2">
                             <Activity className="w-5 h-5 text-blue-600" />
-                            <h3 className="text-lg font-bold text-gray-900">Transactions Récentes</h3>
+                            <h3 className="text-base sm:text-lg font-bold text-gray-900">Transactions Récentes</h3>
                         </div>
                     </div>
 
                     <div className="overflow-x-auto">
-                        <table className="w-full">
+                        <table className="w-full min-w-[700px]">
                             <thead className="bg-gray-50">
                                 <tr>
                                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">ID Certificat</th>
@@ -179,10 +179,10 @@ function OrganizationAnalytics({ certificates, contract }) {
             )}
 
             {analytics.recentTransactions.length === 0 && !loading && (
-                <div className="bg-white rounded-xl shadow-lg border border-gray-100 p-12 text-center">
-                    <Activity className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-                    <h4 className="text-lg font-bold text-gray-900 mb-2">Aucune donnée disponible</h4>
-                    <p className="text-gray-600">Les analytics seront disponibles une fois que des certificats seront émis.</p>
+                <div className="bg-white rounded-xl shadow-lg border border-gray-100 p-8 sm:p-12 text-center">
+                    <Activity className="w-12 h-12 sm:w-16 sm:h-16 text-gray-300 mx-auto mb-4" />
+                    <h4 className="text-base sm:text-lg font-bold text-gray-900 mb-2">Aucune donnée disponible</h4>
+                    <p className="text-sm sm:text-base text-gray-600">Les analytics seront disponibles une fois que des certificats seront émis.</p>
                 </div>
             )}
         </div>

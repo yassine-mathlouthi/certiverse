@@ -184,22 +184,22 @@ function CertificateVerification({ onBack }) {
 
             {/* Header */}
             <nav className="glass sticky top-0 z-50 border-b border-white/20">
-                <div className="max-w-7xl mx-auto px-6 py-4">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4">
                     <div className="flex items-center justify-between">
                         <motion.div
-                            className="flex items-center space-x-3"
+                            className="flex items-center space-x-2 sm:space-x-3"
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.5 }}
                         >
-                            <div className="bg-gradient-primary p-2.5 rounded-xl shadow-lg glow">
-                                <Shield className="w-7 h-7 text-white" />
+                            <div className="bg-gradient-primary p-2 sm:p-2.5 rounded-xl shadow-lg glow">
+                                <Shield className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
                             </div>
                             <div>
-                                <h1 className="text-2xl font-bold gradient-text font-display">
+                                <h1 className="text-xl sm:text-2xl font-bold gradient-text font-display">
                                     CertiVerse
                                 </h1>
-                                <p className="text-xs text-gray-500">Vérification de Certificat</p>
+                                <p className="text-xs text-gray-500 hidden sm:block">Vérification de Certificat</p>
                             </div>
                         </motion.div>
                         {onBack && (
@@ -208,10 +208,10 @@ function CertificateVerification({ onBack }) {
                                 initial={{ opacity: 0, x: 20 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ duration: 0.5, delay: 0.2 }}
-                                className="flex items-center space-x-2 text-gray-600 hover:text-[var(--color-primary-600)] transition-colors px-4 py-2 rounded-xl hover:bg-white/50"
+                                className="flex items-center space-x-1 sm:space-x-2 text-gray-600 hover:text-[var(--color-primary-600)] transition-colors px-3 sm:px-4 py-2 rounded-xl hover:bg-white/50"
                             >
                                 <ArrowLeft className="w-5 h-5" />
-                                <span className="font-medium">Retour</span>
+                                <span className="font-medium hidden sm:inline">Retour</span>
                             </motion.button>
                         )}
                     </div>
@@ -219,24 +219,24 @@ function CertificateVerification({ onBack }) {
             </nav>
 
             {/* Main Content */}
-            <main className="max-w-4xl mx-auto px-6 py-16 relative z-10">
+            <main className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-16 relative z-10">
                 <motion.div
-                    className="text-center mb-12"
+                    className="text-center mb-8 sm:mb-12"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
                 >
-                    <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 font-display">
+                    <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-3 sm:mb-4 font-display">
                         Vérifier l'Authenticité du Certificat
                     </h2>
-                    <p className="text-lg text-gray-600 max-w-xl mx-auto">
+                    <p className="text-base sm:text-lg text-gray-600 max-w-xl mx-auto px-2">
                         Entrez l'ID du certificat pour vérifier son authenticité sur la blockchain
                     </p>
                 </motion.div>
 
                 {/* Search Box */}
                 <motion.div
-                    className="card p-8 mb-8"
+                    className="card p-4 sm:p-8 mb-6 sm:mb-8"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.1 }}
@@ -312,11 +312,11 @@ function CertificateVerification({ onBack }) {
                             transition={{ type: "spring", stiffness: 200 }}
                         >
                             {/* Status Banner */}
-                            <div className={`px-8 py-8 ${certificate.revoked
+                            <div className={`px-4 sm:px-8 py-6 sm:py-8 ${certificate.revoked
                                 ? 'bg-gradient-to-r from-red-500 to-red-600'
                                 : 'bg-gradient-to-r from-emerald-500 to-emerald-600'
                                 }`}>
-                                <div className="flex items-center justify-between text-white">
+                                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-white">
                                     <div className="flex items-center space-x-4">
                                         <motion.div
                                             className="bg-white/20 p-3 rounded-2xl backdrop-blur-sm"
@@ -332,7 +332,7 @@ function CertificateVerification({ onBack }) {
                                         </motion.div>
                                         <div>
                                             <motion.div
-                                                className="text-2xl md:text-3xl font-bold font-display"
+                                                className="text-xl sm:text-2xl md:text-3xl font-bold font-display"
                                                 initial={{ opacity: 0, x: -20 }}
                                                 animate={{ opacity: 1, x: 0 }}
                                                 transition={{ delay: 0.3 }}
@@ -359,13 +359,13 @@ function CertificateVerification({ onBack }) {
                             </div>
 
                             {/* Certificate Information */}
-                            <div className="p-8">
-                                <h3 className="text-2xl font-bold text-gray-900 mb-8 font-display flex items-center gap-3">
-                                    <Award className="w-7 h-7 text-[var(--color-primary-500)]" />
+                            <div className="p-4 sm:p-8">
+                                <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6 sm:mb-8 font-display flex items-center gap-2 sm:gap-3">
+                                    <Award className="w-6 h-6 sm:w-7 sm:h-7 text-[var(--color-primary-500)]" />
                                     Détails du Certificat
                                 </h3>
 
-                                <div className="grid md:grid-cols-2 gap-6">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                                     {/* Student Info */}
                                     <div className="space-y-5">
                                         <div className="bg-gray-50 rounded-xl p-4">
@@ -427,19 +427,19 @@ function CertificateVerification({ onBack }) {
                                 </div>
 
                                 {/* Blockchain Proof */}
-                                <div className="mt-10 pt-8 border-t border-gray-200">
-                                    <h4 className="font-bold text-gray-900 mb-6 flex items-center space-x-2 text-lg font-display">
-                                        <Shield className="w-6 h-6 text-[var(--color-primary-500)]" />
+                                <div className="mt-6 sm:mt-10 pt-6 sm:pt-8 border-t border-gray-200">
+                                    <h4 className="font-bold text-gray-900 mb-4 sm:mb-6 flex items-center space-x-2 text-base sm:text-lg font-display">
+                                        <Shield className="w-5 h-5 sm:w-6 sm:h-6 text-[var(--color-primary-500)]" />
                                         <span>Vérification Blockchain</span>
                                     </h4>
 
                                     <div className="space-y-3">
                                         {/* Transaction Hash Row */}
                                         {certificate.transactionHash && (
-                                            <div className="flex items-center justify-between bg-[var(--color-primary-50)] rounded-xl p-4 border border-[var(--color-primary-200)]">
-                                                <span className="text-sm text-gray-600 font-semibold">Transaction Émission</span>
+                                            <div className="flex flex-col sm:flex-row sm:items-center justify-between bg-[var(--color-primary-50)] rounded-xl p-3 sm:p-4 border border-[var(--color-primary-200)] gap-2">
+                                                <span className="text-xs sm:text-sm text-gray-600 font-semibold">Transaction Émission</span>
                                                 <div className="flex items-center space-x-2">
-                                                    <code className="text-sm font-mono text-gray-900 bg-white px-2 py-1 rounded-lg">{certificate.transactionHash.slice(0, 10)}...{certificate.transactionHash.slice(-8)}</code>
+                                                    <code className="text-xs sm:text-sm font-mono text-gray-900 bg-white px-2 py-1 rounded-lg truncate max-w-[120px] sm:max-w-none">{certificate.transactionHash.slice(0, 10)}...{certificate.transactionHash.slice(-8)}</code>
                                                     <button
                                                         onClick={() => copyToClipboard(certificate.transactionHash)}
                                                         className="p-2 hover:bg-[var(--color-primary-100)] rounded-lg transition-colors"
@@ -461,10 +461,10 @@ function CertificateVerification({ onBack }) {
 
                                         {/* Revocation Transaction Hash Row */}
                                         {certificate.revokeTxHash && (
-                                            <div className="flex items-center justify-between bg-red-50 rounded-xl p-4 border border-red-200">
-                                                <span className="text-sm text-gray-600 font-semibold">Transaction Révocation</span>
+                                            <div className="flex flex-col sm:flex-row sm:items-center justify-between bg-red-50 rounded-xl p-3 sm:p-4 border border-red-200 gap-2">
+                                                <span className="text-xs sm:text-sm text-gray-600 font-semibold">Transaction Révocation</span>
                                                 <div className="flex items-center space-x-2">
-                                                    <code className="text-sm font-mono text-gray-900 bg-white px-2 py-1 rounded-lg">{certificate.revokeTxHash.slice(0, 10)}...{certificate.revokeTxHash.slice(-8)}</code>
+                                                    <code className="text-xs sm:text-sm font-mono text-gray-900 bg-white px-2 py-1 rounded-lg truncate max-w-[120px] sm:max-w-none">{certificate.revokeTxHash.slice(0, 10)}...{certificate.revokeTxHash.slice(-8)}</code>
                                                     <button
                                                         onClick={() => copyToClipboard(certificate.revokeTxHash)}
                                                         className="p-2 hover:bg-red-100 rounded-lg transition-colors"
@@ -484,10 +484,10 @@ function CertificateVerification({ onBack }) {
                                             </div>
                                         )}
 
-                                        <div className="flex items-center justify-between bg-gray-100 rounded-xl p-4">
-                                            <span className="text-sm text-gray-600 font-semibold">Portefeuille Étudiant</span>
+                                        <div className="flex flex-col sm:flex-row sm:items-center justify-between bg-gray-100 rounded-xl p-3 sm:p-4 gap-2">
+                                            <span className="text-xs sm:text-sm text-gray-600 font-semibold">Portefeuille Étudiant</span>
                                             <div className="flex items-center space-x-2">
-                                                <code className="text-sm font-mono bg-white px-2 py-1 rounded-lg">{certificate.student.slice(0, 10)}...{certificate.student.slice(-8)}</code>
+                                                <code className="text-xs sm:text-sm font-mono bg-white px-2 py-1 rounded-lg truncate max-w-[120px] sm:max-w-none">{certificate.student.slice(0, 10)}...{certificate.student.slice(-8)}</code>
                                                 <button
                                                     onClick={() => copyToClipboard(certificate.student)}
                                                     className="p-2 hover:bg-gray-200 rounded-lg transition-colors"
@@ -505,10 +505,10 @@ function CertificateVerification({ onBack }) {
                                             </div>
                                         </div>
 
-                                        <div className="flex items-center justify-between bg-gray-100 rounded-xl p-4">
-                                            <span className="text-sm text-gray-600 font-semibold">Portefeuille Émetteur</span>
+                                        <div className="flex flex-col sm:flex-row sm:items-center justify-between bg-gray-100 rounded-xl p-3 sm:p-4 gap-2">
+                                            <span className="text-xs sm:text-sm text-gray-600 font-semibold">Portefeuille Émetteur</span>
                                             <div className="flex items-center space-x-2">
-                                                <code className="text-sm font-mono bg-white px-2 py-1 rounded-lg">{certificate.issuer.slice(0, 10)}...{certificate.issuer.slice(-8)}</code>
+                                                <code className="text-xs sm:text-sm font-mono bg-white px-2 py-1 rounded-lg truncate max-w-[120px] sm:max-w-none">{certificate.issuer.slice(0, 10)}...{certificate.issuer.slice(-8)}</code>
                                                 <a
                                                     href={getBlockExplorerUrl(certificate.issuer)}
                                                     target="_blank"
@@ -522,10 +522,10 @@ function CertificateVerification({ onBack }) {
 
                                         {/* IPFS Hash Display */}
                                         {certificate.ipfsHash && (
-                                            <div className="flex items-center justify-between bg-purple-50 rounded-xl p-4 border border-purple-200">
-                                                <span className="text-sm text-gray-600 font-semibold">Hash IPFS</span>
+                                            <div className="flex flex-col sm:flex-row sm:items-center justify-between bg-purple-50 rounded-xl p-3 sm:p-4 border border-purple-200 gap-2">
+                                                <span className="text-xs sm:text-sm text-gray-600 font-semibold">Hash IPFS</span>
                                                 <div className="flex items-center space-x-2">
-                                                    <code className="text-sm font-mono bg-white px-2 py-1 rounded-lg">{certificate.ipfsHash.replace('ipfs://', '').slice(0, 10)}...{certificate.ipfsHash.replace('ipfs://', '').slice(-8)}</code>
+                                                    <code className="text-xs sm:text-sm font-mono bg-white px-2 py-1 rounded-lg truncate max-w-[120px] sm:max-w-none">{certificate.ipfsHash.replace('ipfs://', '').slice(0, 10)}...{certificate.ipfsHash.replace('ipfs://', '').slice(-8)}</code>
                                                     <button
                                                         onClick={() => copyToClipboard(certificate.ipfsHash.replace('ipfs://', ''))}
                                                         className="p-2 hover:bg-purple-100 rounded-lg transition-colors"

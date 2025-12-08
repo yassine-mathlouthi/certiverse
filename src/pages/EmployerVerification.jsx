@@ -12,22 +12,22 @@ function EmployerVerification({ onNavigateToVerify, onNavigateToProfile, onNavig
 
             {/* Header */}
             <nav className="glass sticky top-0 z-50 border-b border-white/20">
-                <div className="max-w-7xl mx-auto px-6 py-4">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4">
                     <div className="flex items-center justify-between">
                         <motion.div
-                            className="flex items-center space-x-3"
+                            className="flex items-center space-x-2 sm:space-x-3"
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.5 }}
                         >
-                            <div className="bg-gradient-primary p-2.5 rounded-xl shadow-lg glow">
-                                <Shield className="w-7 h-7 text-white" />
+                            <div className="bg-gradient-primary p-2 sm:p-2.5 rounded-xl shadow-lg glow">
+                                <Shield className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
                             </div>
                             <div>
-                                <h1 className="text-2xl font-bold gradient-text font-display">
+                                <h1 className="text-xl sm:text-2xl font-bold gradient-text font-display">
                                     CertiVerse
                                 </h1>
-                                <p className="text-xs text-gray-500">Portail de Vérification Employeur</p>
+                                <p className="text-xs text-gray-500 hidden sm:block">Portail de Vérification Employeur</p>
                             </div>
                         </motion.div>
 
@@ -37,10 +37,10 @@ function EmployerVerification({ onNavigateToVerify, onNavigateToProfile, onNavig
                                 initial={{ opacity: 0, x: 20 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ duration: 0.5, delay: 0.2 }}
-                                className="group flex items-center space-x-2 px-5 py-2.5 glass-dark rounded-xl font-medium hover:shadow-lg transition-all duration-300 border border-gray-200/50"
+                                className="group flex items-center space-x-1 sm:space-x-2 px-3 sm:px-5 py-2 sm:py-2.5 glass-dark rounded-xl font-medium hover:shadow-lg transition-all duration-300 border border-gray-200/50"
                             >
                                 <Home className="w-5 h-5 text-[var(--color-primary-500)] group-hover:scale-110 transition-transform" />
-                                <span className="text-gray-700 group-hover:text-[var(--color-primary-600)]">Accueil</span>
+                                <span className="text-gray-700 group-hover:text-[var(--color-primary-600)] hidden sm:inline">Accueil</span>
                             </motion.button>
                         )}
                     </div>
@@ -48,10 +48,10 @@ function EmployerVerification({ onNavigateToVerify, onNavigateToProfile, onNavig
             </nav>
 
             {/* Main Content */}
-            <main className="max-w-6xl mx-auto px-6 py-20 relative z-10">
-                <div className="text-center mb-20">
+            <main className="max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-20 relative z-10">
+                <div className="text-center mb-10 sm:mb-20">
                     <motion.div
-                        className="inline-flex items-center space-x-2 badge badge-primary mb-8"
+                        className="inline-flex items-center space-x-2 badge badge-primary mb-6 sm:mb-8"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: 0.2 }}
@@ -61,7 +61,7 @@ function EmployerVerification({ onNavigateToVerify, onNavigateToProfile, onNavig
                     </motion.div>
 
                     <motion.h2
-                        className="text-5xl md:text-7xl font-bold text-gray-900 mb-8 leading-tight font-display"
+                        className="text-3xl sm:text-5xl md:text-7xl font-bold text-gray-900 mb-6 sm:mb-8 leading-tight font-display"
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.3 }}
@@ -74,7 +74,7 @@ function EmployerVerification({ onNavigateToVerify, onNavigateToProfile, onNavig
                     </motion.h2>
 
                     <motion.p
-                        className="text-xl text-gray-600 max-w-2xl mx-auto mb-12 leading-relaxed"
+                        className="text-base sm:text-xl text-gray-600 max-w-2xl mx-auto mb-8 sm:mb-12 leading-relaxed px-2"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: 0.4 }}
@@ -85,7 +85,7 @@ function EmployerVerification({ onNavigateToVerify, onNavigateToProfile, onNavig
 
                 {/* Two Options */}
                 <motion.div
-                    className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto"
+                    className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-5xl mx-auto"
                     initial={{ opacity: 0, y: 40 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.5 }}
@@ -93,7 +93,7 @@ function EmployerVerification({ onNavigateToVerify, onNavigateToProfile, onNavig
                     {/* Certificate Verification */}
                     <motion.button
                         onClick={onNavigateToVerify}
-                        className="group card p-10 text-left relative overflow-hidden"
+                        className="group card p-6 sm:p-10 text-left relative overflow-hidden"
                         whileHover={{ y: -8 }}
                         transition={{ type: "spring", stiffness: 300 }}
                     >
@@ -101,13 +101,13 @@ function EmployerVerification({ onNavigateToVerify, onNavigateToProfile, onNavig
                         <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-primary-500)]/5 to-[var(--color-primary-600)]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
                         <div className="relative z-10">
-                            <div className="bg-gradient-to-br from-[var(--color-primary-500)] to-[var(--color-primary-600)] w-18 h-18 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300 shadow-lg w-[72px] h-[72px]">
-                                <Search className="w-9 h-9 text-white" />
+                            <div className="bg-gradient-to-br from-[var(--color-primary-500)] to-[var(--color-primary-600)] rounded-2xl flex items-center justify-center mb-6 sm:mb-8 group-hover:scale-110 transition-transform duration-300 shadow-lg w-14 h-14 sm:w-[72px] sm:h-[72px]">
+                                <Search className="w-7 h-7 sm:w-9 sm:h-9 text-white" />
                             </div>
-                            <h3 className="text-2xl font-bold text-gray-900 mb-4 font-display">
+                            <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4 font-display">
                                 Vérifier un Certificat
                             </h3>
-                            <p className="text-gray-600 leading-relaxed mb-8">
+                            <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-6 sm:mb-8">
                                 Vérifiez rapidement l'authenticité d'un certificat spécifique en utilisant son ID ou son code QR. Parfait pour valider les diplômes pendant le processus de recrutement.
                             </p>
                             <div className="flex items-center text-[var(--color-primary-600)] font-semibold group-hover:translate-x-2 transition-transform duration-300">
@@ -120,7 +120,7 @@ function EmployerVerification({ onNavigateToVerify, onNavigateToProfile, onNavig
                     {/* Student Profile Viewer */}
                     <motion.button
                         onClick={onNavigateToProfile}
-                        className="group card p-10 text-left relative overflow-hidden"
+                        className="group card p-6 sm:p-10 text-left relative overflow-hidden"
                         whileHover={{ y: -8 }}
                         transition={{ type: "spring", stiffness: 300 }}
                     >
@@ -128,13 +128,13 @@ function EmployerVerification({ onNavigateToVerify, onNavigateToProfile, onNavig
                         <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-secondary-500)]/5 to-[var(--color-secondary-600)]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
                         <div className="relative z-10">
-                            <div className="bg-gradient-to-br from-[var(--color-secondary-500)] to-[var(--color-secondary-600)] w-18 h-18 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300 shadow-lg w-[72px] h-[72px]">
-                                <User className="w-9 h-9 text-white" />
+                            <div className="bg-gradient-to-br from-[var(--color-secondary-500)] to-[var(--color-secondary-600)] rounded-2xl flex items-center justify-center mb-6 sm:mb-8 group-hover:scale-110 transition-transform duration-300 shadow-lg w-14 h-14 sm:w-[72px] sm:h-[72px]">
+                                <User className="w-7 h-7 sm:w-9 sm:h-9 text-white" />
                             </div>
-                            <h3 className="text-2xl font-bold text-gray-900 mb-4 font-display">
+                            <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4 font-display">
                                 Voir le Profil Étudiant
                             </h3>
-                            <p className="text-gray-600 leading-relaxed mb-8">
+                            <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-6 sm:mb-8">
                                 Consultez tous les certificats et qualifications pour une adresse étudiante. Nécessite une connexion de portefeuille pour un accès sécurisé aux profils complets.
                             </p>
                             <div className="flex items-center text-[var(--color-secondary-600)] font-semibold group-hover:translate-x-2 transition-transform duration-300">
@@ -147,44 +147,44 @@ function EmployerVerification({ onNavigateToVerify, onNavigateToProfile, onNavig
 
                 {/* Features */}
                 <motion.div
-                    className="mt-28 grid md:grid-cols-3 gap-6"
+                    className="mt-16 sm:mt-28 grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6"
                     initial={{ opacity: 0, y: 40 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.6 }}
                 >
-                    <div className="glass-dark rounded-2xl p-8 text-center group hover:shadow-lg transition-all duration-300">
-                        <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br from-[var(--color-primary-500)] to-[var(--color-primary-600)] mb-4 group-hover:scale-110 transition-transform">
-                            <Zap className="w-7 h-7 text-white" />
+                    <div className="glass-dark rounded-2xl p-6 sm:p-8 text-center group hover:shadow-lg transition-all duration-300">
+                        <div className="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br from-[var(--color-primary-500)] to-[var(--color-primary-600)] mb-4 group-hover:scale-110 transition-transform">
+                            <Zap className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
                         </div>
-                        <div className="text-3xl font-bold gradient-text mb-2 font-display">Instantané</div>
-                        <p className="text-gray-600">Vérification en temps réel depuis la blockchain</p>
+                        <div className="text-2xl sm:text-3xl font-bold gradient-text mb-2 font-display">Instantané</div>
+                        <p className="text-sm sm:text-base text-gray-600">Vérification en temps réel depuis la blockchain</p>
                     </div>
-                    <div className="glass-dark rounded-2xl p-8 text-center group hover:shadow-lg transition-all duration-300">
-                        <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br from-[var(--color-secondary-500)] to-[var(--color-secondary-600)] mb-4 group-hover:scale-110 transition-transform">
-                            <Lock className="w-7 h-7 text-white" />
+                    <div className="glass-dark rounded-2xl p-6 sm:p-8 text-center group hover:shadow-lg transition-all duration-300">
+                        <div className="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br from-[var(--color-secondary-500)] to-[var(--color-secondary-600)] mb-4 group-hover:scale-110 transition-transform">
+                            <Lock className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
                         </div>
-                        <div className="text-3xl font-bold gradient-text-secondary mb-2 font-display">Sécurisé</div>
-                        <p className="text-gray-600">Diplômes vérifiés cryptographiquement</p>
+                        <div className="text-2xl sm:text-3xl font-bold gradient-text-secondary mb-2 font-display">Sécurisé</div>
+                        <p className="text-sm sm:text-base text-gray-600">Diplômes vérifiés cryptographiquement</p>
                     </div>
-                    <div className="glass-dark rounded-2xl p-8 text-center group hover:shadow-lg transition-all duration-300">
-                        <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br from-[var(--color-success-500)] to-emerald-600 mb-4 group-hover:scale-110 transition-transform">
-                            <Sparkles className="w-7 h-7 text-white" />
+                    <div className="glass-dark rounded-2xl p-6 sm:p-8 text-center group hover:shadow-lg transition-all duration-300">
+                        <div className="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br from-[var(--color-success-500)] to-emerald-600 mb-4 group-hover:scale-110 transition-transform">
+                            <Sparkles className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
                         </div>
-                        <div className="text-3xl font-bold text-emerald-600 mb-2 font-display">Fiable</div>
-                        <p className="text-gray-600">Enregistrements de certificats infalsifiables</p>
+                        <div className="text-2xl sm:text-3xl font-bold text-emerald-600 mb-2 font-display">Fiable</div>
+                        <p className="text-sm sm:text-base text-gray-600">Enregistrements de certificats infalsifiables</p>
                     </div>
                 </motion.div>
             </main>
 
 
             {/* Footer */}
-            <footer className="bg-gradient-to-b from-gray-900 to-gray-950 text-gray-300 mt-28 relative z-10">
+            <footer className="bg-gradient-to-b from-gray-900 to-gray-950 text-gray-300 mt-16 sm:mt-28 relative z-10">
                 {/* Top accent line */}
                 <div className="h-1 bg-gradient-primary"></div>
 
-                <div className="max-w-7xl mx-auto px-6 py-16">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10 sm:py-16">
                     {/* Main Footer Content */}
-                    <div className="grid md:grid-cols-4 gap-12 mb-12">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-12 mb-8 sm:mb-12">
                         {/* Brand Column */}
                         <div className="md:col-span-2">
                             <div className="flex items-center space-x-3 mb-6">

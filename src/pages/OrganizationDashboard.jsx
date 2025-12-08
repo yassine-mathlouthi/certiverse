@@ -24,7 +24,7 @@ const uploadToPinata = async (file) => {
   formData.append('pinataMetadata', JSON.stringify({ name: file.name }));
   formData.append('pinataOptions', JSON.stringify({ cidVersion: 1 }));
 
-  const res = await fetch('https://api.pinata.cloud/pinning/pinFileToIPFS', {
+  const res = await fetch(import.meta.env.VITE_PINATA_API_URL, {
     method: 'POST',
     headers: { Authorization: `Bearer ${jwt}` },
     body: formData
@@ -93,27 +93,27 @@ const CertificateViewer = ({ certificate, onClose, onDownload }) => {
   }, [certificate]);
 
   return (
-    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-2 sm:p-4">
       <div className="absolute inset-0" onClick={onClose} />
 
-      <div className="relative bg-white rounded-3xl shadow-2xl w-full max-w-6xl h-[85vh] flex flex-col overflow-hidden">
-        <div className="flex items-center justify-between p-5 border-b bg-gradient-to-r from-blue-600 via-cyan-600 to-indigo-700 text-white rounded-t-3xl">
-          <div className="flex items-center space-x-4">
-            <div className="bg-white/20 p-3 rounded-xl backdrop-blur-sm">
-              <FileText className="w-7 h-7" />
+      <div className="relative bg-white rounded-2xl sm:rounded-3xl shadow-2xl w-full max-w-6xl h-[95vh] sm:h-[85vh] flex flex-col overflow-hidden">
+        <div className="flex items-center justify-between p-3 sm:p-5 border-b bg-gradient-to-r from-blue-600 via-cyan-600 to-indigo-700 text-white rounded-t-2xl sm:rounded-t-3xl">
+          <div className="flex items-center space-x-2 sm:space-x-4">
+            <div className="bg-white/20 p-2 sm:p-3 rounded-xl backdrop-blur-sm">
+              <FileText className="w-5 h-5 sm:w-7 sm:h-7" />
             </div>
             <div>
-              <h3 className="text-xl font-bold">Certificat Officiel</h3>
-              <p className="text-sm opacity-90">{certificate.studentName}</p>
+              <h3 className="text-lg sm:text-xl font-bold">Certificat Officiel</h3>
+              <p className="text-xs sm:text-sm opacity-90 hidden sm:block">{certificate.studentName}</p>
             </div>
           </div>
           <div className="flex items-center space-x-2">
             <button
               onClick={() => onDownload(certificate.ipfsHash, certificate.certId)}
-              className="flex items-center space-x-2 px-4 py-2 bg-white/20 hover:bg-white/30 rounded-xl text-sm font-medium transition-all"
+              className="flex items-center space-x-2 px-3 sm:px-4 py-2 bg-white/20 hover:bg-white/30 rounded-xl text-sm font-medium transition-all"
             >
               <Download className="w-4 h-4" />
-              <span>Télécharger</span>
+              <span className="hidden sm:inline">Télécharger</span>
             </button>
             <button onClick={onClose} className="p-2 hover:bg-white/20 rounded-xl transition-all">
               <X className="w-6 h-6" />
@@ -174,7 +174,7 @@ const CertificateViewer = ({ certificate, onClose, onDownload }) => {
                   {certificate.transactionHash.slice(0, 8)}...{certificate.transactionHash.slice(-6)}
                 </button>
                 <a
-                  href={`https://sepolia.etherscan.io/tx/${certificate.transactionHash}`}
+                  href={`${import.meta.env.VITE_ETHERSCAN_BASE_URL}/tx/${certificate.transactionHash}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-blue-600 hover:underline flex items-center gap-1"
@@ -199,7 +199,7 @@ const CertificateViewer = ({ certificate, onClose, onDownload }) => {
                   {certificate.revokeTxHash.slice(0, 8)}...{certificate.revokeTxHash.slice(-6)}
                 </button>
                 <a
-                  href={`https://sepolia.etherscan.io/tx/${certificate.revokeTxHash}`}
+                  href={`${import.meta.env.VITE_ETHERSCAN_BASE_URL}/tx/${certificate.revokeTxHash}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-red-600 hover:underline flex items-center gap-1"
@@ -225,7 +225,7 @@ const CertificateViewer = ({ certificate, onClose, onDownload }) => {
                   {certificate.ipfsHash.replace('ipfs://', '').slice(0, 8)}...{certificate.ipfsHash.replace('ipfs://', '').slice(-6)}
                 </button>
                 <a
-                  href={`https://ipfs.io/ipfs/${certificate.ipfsHash.replace('ipfs://', '')}`}
+                  href={`https://${import.meta.env.VITE_IPFS_PUBLIC_GATEWAY}/ipfs/${certificate.ipfsHash.replace('ipfs://', '')}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-purple-600 hover:underline flex items-center gap-1"
@@ -487,7 +487,7 @@ export default function OrganizationDashboard({
       );
       await tx.wait();
 
-      const verifyUrl = `https://certiverse-six.vercel.app/verify/${finalCertId}`;
+      const verifyUrl = `${import.meta.env.VITE_APP_BASE_URL}/verify/${finalCertId}`;
       navigator.clipboard.writeText(verifyUrl);
 
       toast.success(`CERTIFICAT ÉMIS !\n\nID : ${finalCertId}\n\nLien copié :\n${verifyUrl}`, {
@@ -622,67 +622,67 @@ export default function OrganizationDashboard({
       <div className="gradient-orb gradient-orb-2 opacity-30"></div>
       {/* ==================== HEADER ==================== */}
       <header className="glass sticky top-0 z-40 border-b border-white/20">
-        <div className="max-w-7xl mx-auto px-6 py-5">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-5">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-5">
-              <div className="bg-gradient-primary p-4 rounded-2xl shadow-lg glow">
+            <div className="flex items-center space-x-3 sm:space-x-5 min-w-0">
+              <div className="bg-gradient-primary p-2.5 sm:p-4 rounded-xl sm:rounded-2xl shadow-lg glow flex-shrink-0">
                 {getOrgIcon()}
               </div>
-              <div>
-                <h1 className="text-3xl font-bold text-gray-900 font-display">{orgName}</h1>
-                <p className="text-sm text-gray-500">Émission de certificats sur blockchain</p>
+              <div className="min-w-0">
+                <h1 className="text-xl sm:text-3xl font-bold text-gray-900 font-display truncate">{orgName}</h1>
+                <p className="text-xs sm:text-sm text-gray-500 hidden sm:block">Émission de certificats sur blockchain</p>
               </div>
             </div>
-            <div className="flex items-center space-x-6">
-              <div className="flex items-center space-x-3 bg-gradient-to-r from-blue-600 to-cyan-600 px-5 py-3 rounded-xl text-white font-medium">
+            <div className="flex items-center space-x-2 sm:space-x-6 flex-shrink-0">
+              <div className="hidden md:flex items-center space-x-3 bg-gradient-to-r from-blue-600 to-cyan-600 px-3 sm:px-5 py-2 sm:py-3 rounded-xl text-white font-medium">
                 <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
                 <span className="font-mono text-sm">{truncateAddress(orgAddress)}</span>
                 <button onClick={() => copyToClipboard(orgAddress, 'org')} className="ml-2 hover:bg-white/20 p-1.5 rounded transition">
                   {copiedId === 'org' ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                 </button>
               </div>
-              <button onClick={onDisconnect} className="flex items-center space-x-2 px-5 py-3 bg-red-50 text-red-600 rounded-xl hover:bg-red-100 transition font-medium">
-                <LogOut className="w-5 h-5" />
-                <span>Déconnexion</span>
+              <button onClick={onDisconnect} className="flex items-center space-x-1 sm:space-x-2 px-3 sm:px-5 py-2 sm:py-3 bg-red-50 text-red-600 rounded-xl hover:bg-red-100 transition font-medium">
+                <LogOut className="w-4 h-4 sm:w-5 sm:h-5" />
+                <span className="hidden sm:inline">Déconnexion</span>
               </button>
             </div>
           </div>
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-6 py-8">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
         {/* ==================== STATS ==================== */}
-        <div className="grid md:grid-cols-3 gap-6 mb-8">
-          <div className="card p-6 stat-card">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-6 mb-6 sm:mb-8">
+          <div className="card p-3 sm:p-6 stat-card">
             <div className="flex items-center justify-between">
-              <div><p className="text-gray-500 text-sm font-medium mb-1">Total Certificats</p><p className="text-3xl font-bold text-gray-900 font-display">{stats.totalCertificates}</p></div>
-              <div className="bg-gradient-to-br from-[var(--color-primary-500)] to-[var(--color-primary-600)] p-3 rounded-xl shadow-lg"><Award className="w-8 h-8 text-white" /></div>
+              <div><p className="text-gray-500 text-xs sm:text-sm font-medium mb-1">Total Certificats</p><p className="text-xl sm:text-3xl font-bold text-gray-900 font-display">{stats.totalCertificates}</p></div>
+              <div className="bg-gradient-to-br from-[var(--color-primary-500)] to-[var(--color-primary-600)] p-2 sm:p-3 rounded-xl shadow-lg"><Award className="w-5 h-5 sm:w-8 sm:h-8 text-white" /></div>
             </div>
           </div>
-          <div className="card p-6 stat-card">
+          <div className="card p-3 sm:p-6 stat-card">
             <div className="flex items-center justify-between">
-              <div><p className="text-gray-500 text-sm font-medium mb-1">Révoqués</p><p className="text-3xl font-bold text-gray-900 font-display">{stats.revokedCertificates}</p></div>
-              <div className="bg-gradient-to-br from-red-500 to-red-600 p-3 rounded-xl shadow-lg"><Ban className="w-8 h-8 text-white" /></div>
+              <div><p className="text-gray-500 text-xs sm:text-sm font-medium mb-1">Révoqués</p><p className="text-xl sm:text-3xl font-bold text-gray-900 font-display">{stats.revokedCertificates}</p></div>
+              <div className="bg-gradient-to-br from-red-500 to-red-600 p-2 sm:p-3 rounded-xl shadow-lg"><Ban className="w-5 h-5 sm:w-8 sm:h-8 text-white" /></div>
             </div>
           </div>
-          <div className="card p-6 stat-card">
+          <div className="card p-3 sm:p-6 stat-card col-span-2 sm:col-span-1">
             <div className="flex items-center justify-between">
-              <div><p className="text-gray-500 text-sm font-medium mb-1">Étudiants Uniques</p><p className="text-3xl font-bold text-gray-900 font-display">{stats.totalStudents}</p></div>
-              <div className="bg-gradient-to-br from-emerald-500 to-emerald-600 p-3 rounded-xl shadow-lg"><Users className="w-8 h-8 text-white" /></div>
+              <div><p className="text-gray-500 text-xs sm:text-sm font-medium mb-1">Étudiants Uniques</p><p className="text-xl sm:text-3xl font-bold text-gray-900 font-display">{stats.totalStudents}</p></div>
+              <div className="bg-gradient-to-br from-emerald-500 to-emerald-600 p-2 sm:p-3 rounded-xl shadow-lg"><Users className="w-5 h-5 sm:w-8 sm:h-8 text-white" /></div>
             </div>
           </div>
         </div>
 
-        <div className="flex space-x-2 mb-6">
+        <div className="flex space-x-2 mb-6 tabs-scroll">
           <button
             onClick={() => setActiveTab('table')}
-            className={`flex items-center space-x-2 px-6 py-3 rounded-xl font-semibold transition-all ${activeTab === 'table'
+            className={`flex items-center space-x-2 px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl font-semibold transition-all whitespace-nowrap ${activeTab === 'table'
               ? 'bg-white shadow-lg text-blue-600 border-2 border-blue-200'
               : 'bg-white/50 text-gray-600 hover:bg-white'
               }`}
           >
             <Award className="w-5 h-5" />
-            <span>Certificats Émis</span>
+            <span className="hidden sm:inline">Certificats Émis</span>
             <span className={`px-2 py-0.5 rounded-full text-xs ${activeTab === 'table' ? 'bg-blue-100 text-blue-700' : 'bg-gray-200 text-gray-600'
               }`}>
               {stats.totalCertificates}
@@ -691,13 +691,13 @@ export default function OrganizationDashboard({
 
           <button
             onClick={() => setActiveTab('analytics')}
-            className={`flex items-center space-x-2 px-6 py-3 rounded-xl font-semibold transition-all ${activeTab === 'analytics'
+            className={`flex items-center space-x-2 px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl font-semibold transition-all whitespace-nowrap ${activeTab === 'analytics'
               ? 'bg-white shadow-lg text-purple-600 border-2 border-purple-200'
               : 'bg-white/50 text-gray-600 hover:bg-white'
               }`}
           >
             <Activity className="w-5 h-5" />
-            <span>Analytique</span>
+            <span className="hidden sm:inline">Analytique</span>
           </button>
         </div>
 
@@ -705,42 +705,42 @@ export default function OrganizationDashboard({
         {/* ==================== TABLEAU ==================== */}
         {activeTab === 'table' && (
           <div className="card overflow-hidden">
-            <div className="p-6 border-b border-gray-200">
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between space, space-y-4 md:space-y-0 mb-6">
-                <h2 className="text-xl font-bold text-gray-900">Certificats Émis</h2>
-                <div className="flex gap-3">
+            <div className="p-4 sm:p-6 border-b border-gray-200">
+              <div className="flex flex-col space-y-4 mb-6">
+                <h2 className="text-lg sm:text-xl font-bold text-gray-900">Certificats Émis</h2>
+                <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
                   <button
                     onClick={() => setShowBatchModal(true)}
-                    className="inline-flex items-center space-x-2 px-5 py-3 border-2 border-[var(--color-primary-500)] text-[var(--color-primary-600)] rounded-xl hover:bg-[var(--color-primary-50)] transition-all font-semibold"
+                    className="inline-flex items-center justify-center space-x-2 px-4 sm:px-5 py-2.5 sm:py-3 border-2 border-[var(--color-primary-500)] text-[var(--color-primary-600)] rounded-xl hover:bg-[var(--color-primary-50)] transition-all font-semibold text-sm sm:text-base"
                   >
-                    <Upload className="w-5 h-5" />
+                    <Upload className="w-4 h-4 sm:w-5 sm:h-5" />
                     <span>Émission en lot</span>
                   </button>
-                  <button onClick={() => setShowIssueForm(true)} className="inline-flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-cyan-600 text-white rounded-xl hover:from-blue-700 hover:to-cyan-700 transition-all font-semibold shadow-lg">
-                    <Plus className="w-5 h-5" /><span>Émettre un certificat</span>
+                  <button onClick={() => setShowIssueForm(true)} className="inline-flex items-center justify-center space-x-2 px-4 sm:px-6 py-2.5 sm:py-3 bg-gradient-to-r from-blue-600 to-cyan-600 text-white rounded-xl hover:from-blue-700 hover:to-cyan-700 transition-all font-semibold shadow-lg text-sm sm:text-base">
+                    <Plus className="w-4 h-4 sm:w-5 sm:h-5" /><span>Émettre un certificat</span>
                   </button>
                 </div>
               </div>
-              <div className="grid md:grid-cols-4 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2 sm:gap-4">
                 <div className="relative">
                   <Search className="w-5 h-5 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
-                  <input type="text" placeholder="Rechercher..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" />
+                  <input type="text" placeholder="Rechercher..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none text-sm sm:text-base" />
                 </div>
-                <select value={filterType} onChange={(e) => setFilterType(e.target.value)} className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white">
+                <select value={filterType} onChange={(e) => setFilterType(e.target.value)} className="px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white text-sm sm:text-base">
                   <option value="all">Tous les types</option>
                   <option>Diplôme</option>
                   <option>Certification</option>
                   <option>Formation</option>
                   <option>Attestation</option>
                 </select>
-                <select value={filterStatus} onChange={(e) => setFilterStatus(e.target.value)} className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white">
-                  <option value="all">Tous les statuts</option>
+                <select value={filterStatus} onChange={(e) => setFilterStatus(e.target.value)} className="px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white text-sm sm:text-base">
+                  <option value="all">Tous statuts</option>
                   <option value="actif">Actif</option>
                   <option value="révoqué">Révoqué</option>
                 </select>
-                <select value={sortOrder} onChange={(e) => setSortOrder(e.target.value)} className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white">
-                  <option value="newest">Plus récents d'abord</option>
-                  <option value="oldest">Plus anciens d'abord</option>
+                <select value={sortOrder} onChange={(e) => setSortOrder(e.target.value)} className="px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white text-sm sm:text-base">
+                  <option value="newest">Plus récents</option>
+                  <option value="oldest">Plus anciens</option>
                 </select>
               </div>
               {(searchTerm || filterType !== 'all' || filterStatus !== 'all' || sortOrder !== 'newest') && (
@@ -882,26 +882,26 @@ export default function OrganizationDashboard({
 
       {/* ==================== MODAL ÉMISSION ==================== */}
       {showIssueForm && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] flex flex-col">
-            <div className="bg-white border-b border-gray-200 px-6 py-4 rounded-t-2xl flex-shrink-0">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-2xl font-bold text-gray-900">Émettre un Nouveau Certificat</h3>
-                <button onClick={() => { setShowIssueForm(false); setCurrentStep(1); setIssueStatus(''); }} className="p-2 hover:bg-gray-100 rounded-lg"><X className="w-6 h-6 text-gray-500" /></button>
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-2 sm:p-4">
+          <div className="bg-white rounded-xl sm:rounded-2xl shadow-2xl max-w-4xl w-full max-h-[95vh] sm:max-h-[90vh] flex flex-col">
+            <div className="bg-white border-b border-gray-200 px-4 sm:px-6 py-3 sm:py-4 rounded-t-xl sm:rounded-t-2xl flex-shrink-0">
+              <div className="flex items-center justify-between mb-3 sm:mb-4">
+                <h3 className="text-lg sm:text-2xl font-bold text-gray-900">Émettre un Nouveau Certificat</h3>
+                <button onClick={() => { setShowIssueForm(false); setCurrentStep(1); setIssueStatus(''); }} className="p-2 hover:bg-gray-100 rounded-lg"><X className="w-5 h-5 sm:w-6 sm:h-6 text-gray-500" /></button>
               </div>
               <div className="flex items-center justify-between">
                 {[1, 2, 3].map((step) => (
                   <div key={step} className="flex items-center flex-1">
-                    <div className={`flex items-center justify-center w-10 h-10 rounded-full font-bold ${currentStep >= step ? 'bg-gradient-to-r from-blue-600 to-cyan-600 text-white' : 'bg-gray-200 text-gray-500'}`}>
+                    <div className={`flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full font-bold text-sm sm:text-base ${currentStep >= step ? 'bg-gradient-to-r from-blue-600 to-cyan-600 text-white' : 'bg-gray-200 text-gray-500'}`}>
                       {step}
                     </div>
-                    {step < 3 && <div className={`flex-1 h-1 mx-2 ${currentStep > step ? 'bg-gradient-to-r from-blue-600 to-cyan-600' : 'bg-gray-200'}`}></div>}
+                    {step < 3 && <div className={`flex-1 h-1 mx-1 sm:mx-2 ${currentStep > step ? 'bg-gradient-to-r from-blue-600 to-cyan-600' : 'bg-gray-200'}`}></div>}
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="p-6 overflow-y-auto flex-1">
+            <div className="p-4 sm:p-6 overflow-y-auto flex-1">
               {issueStatus && <div className="mb-6">{issueStatus}</div>}
 
               {currentStep === 1 && (
@@ -994,7 +994,7 @@ export default function OrganizationDashboard({
               )}
             </div>
 
-            <div className="bg-gray-50 px-6 py-4 border-t border-gray-200 rounded-b-2xl flex justify-between">
+            <div className="bg-gray-50 px-4 sm:px-6 py-3 sm:py-4 border-t border-gray-200 rounded-b-xl sm:rounded-b-2xl flex justify-between">
               <button onClick={() => setCurrentStep(Math.max(1, currentStep - 1))} disabled={currentStep === 1} className={`flex items-center space-x-2 px-6 py-3 rounded-lg font-semibold ${currentStep === 1 ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : 'bg-white border-2 border-gray-300 text-gray-700 hover:bg-gray-50'}`}>
                 <ChevronLeft className="w-5 h-5" /><span>Précédent</span>
               </button>

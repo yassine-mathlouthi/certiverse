@@ -79,16 +79,16 @@ const CertificateViewer = ({ certificate, onClose, onDownload }) => {
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.9, opacity: 0 }}
         transition={{ type: "spring", duration: 0.5 }}
-        className="relative bg-white rounded-3xl shadow-2xl w-full max-w-6xl h-[85vh] flex flex-col overflow-hidden"
+        className="relative bg-white rounded-2xl sm:rounded-3xl shadow-2xl w-full max-w-6xl h-[90vh] sm:h-[85vh] flex flex-col overflow-hidden"
       >
-        <div className="flex items-center justify-between p-5 border-b bg-gradient-to-r from-blue-600 via-cyan-600 to-indigo-700 text-white rounded-t-3xl">
+        <div className="flex items-center justify-between p-3 sm:p-5 border-b bg-gradient-to-r from-blue-600 via-cyan-600 to-indigo-700 text-white rounded-t-2xl sm:rounded-t-3xl">
           <div className="flex items-center space-x-4">
             <div className="bg-white/20 p-3 rounded-xl backdrop-blur-sm">
               <FileText className="w-7 h-7" />
             </div>
             <div>
-              <h3 className="text-xl font-bold">Certificat Officiel</h3>
-              <p className="text-sm opacity-90">{certificate.formationName}</p>
+              <h3 className="text-lg sm:text-xl font-bold">Certificat Officiel</h3>
+              <p className="text-xs sm:text-sm opacity-90 hidden sm:block">{certificate.formationName}</p>
             </div>
           </div>
           <div className="flex items-center space-x-2">
@@ -97,7 +97,7 @@ const CertificateViewer = ({ certificate, onClose, onDownload }) => {
               className="flex items-center space-x-2 px-4 py-2 bg-white/20 hover:bg-white/30 rounded-xl text-sm font-medium transition-all"
             >
               <Download className="w-4 h-4" />
-              <span>Télécharger</span>
+              <span className="hidden sm:inline">Télécharger</span>
             </button>
             <button onClick={onClose} className="p-2 hover:bg-white/20 rounded-xl transition-all">
               <X className="w-6 h-6" />
@@ -150,7 +150,7 @@ export default function StudentDashboard({ studentAddress, onDisconnect, contrac
   const [copiedVerifyId, setCopiedVerifyId] = useState(null);
 
   // Base URL for verification
-  const VERIFY_BASE_URL = 'https://certiverse-six.vercel.app/verify';
+  const VERIFY_BASE_URL = `${import.meta.env.VITE_APP_BASE_URL}/verify`;
 
   const copyVerifyLink = (certId) => {
     const verifyUrl = `${VERIFY_BASE_URL}/${certId}`;
@@ -453,80 +453,80 @@ export default function StudentDashboard({ studentAddress, onDisconnect, contrac
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6 mb-6 sm:mb-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: 0.1 }}
-            className="card p-6 stat-card"
+            className="card p-4 sm:p-6 stat-card"
           >
-            <div className="flex items-center justify-between mb-3">
-              <div className="bg-blue-100 p-3 rounded-xl">
-                <Award className="w-6 h-6 text-blue-600" />
+            <div className="flex items-center justify-between mb-2 sm:mb-3">
+              <div className="bg-blue-100 p-2 sm:p-3 rounded-xl">
+                <Award className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
               </div>
-              <TrendingUp className="w-5 h-5 text-blue-600" />
+              <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
             </div>
-            <p className="text-3xl font-bold text-gray-900">{stats.total}</p>
-            <p className="text-sm text-gray-600 mt-1">Total Certificats</p>
+            <p className="text-2xl sm:text-3xl font-bold text-gray-900">{stats.total}</p>
+            <p className="text-xs sm:text-sm text-gray-600 mt-1">Total Certificats</p>
           </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: 0.2 }}
-            className="card p-6 stat-card"
+            className="card p-4 sm:p-6 stat-card"
           >
-            <div className="flex items-center justify-between mb-3">
-              <div className="bg-green-100 p-3 rounded-xl">
-                <CheckCircle className="w-6 h-6 text-green-600" />
+            <div className="flex items-center justify-between mb-2 sm:mb-3">
+              <div className="bg-green-100 p-2 sm:p-3 rounded-xl">
+                <CheckCircle className="w-5 h-5 sm:w-6 sm:h-6 text-green-600" />
               </div>
             </div>
-            <p className="text-3xl font-bold text-gray-900">{stats.active}</p>
-            <p className="text-sm text-gray-600 mt-1">Certificats Actifs</p>
+            <p className="text-2xl sm:text-3xl font-bold text-gray-900">{stats.active}</p>
+            <p className="text-xs sm:text-sm text-gray-600 mt-1">Certificats Actifs</p>
           </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: 0.3 }}
-            className="card p-6 stat-card"
+            className="card p-4 sm:p-6 stat-card"
           >
-            <div className="flex items-center justify-between mb-3">
-              <div className="bg-red-100 p-3 rounded-xl">
-                <XCircle className="w-6 h-6 text-red-600" />
+            <div className="flex items-center justify-between mb-2 sm:mb-3">
+              <div className="bg-red-100 p-2 sm:p-3 rounded-xl">
+                <XCircle className="w-5 h-5 sm:w-6 sm:h-6 text-red-600" />
               </div>
             </div>
-            <p className="text-3xl font-bold text-gray-900">{stats.revoked}</p>
-            <p className="text-sm text-gray-600 mt-1">Révoqués</p>
+            <p className="text-2xl sm:text-3xl font-bold text-gray-900">{stats.revoked}</p>
+            <p className="text-xs sm:text-sm text-gray-600 mt-1">Révoqués</p>
           </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: 0.4 }}
-            className="card p-6 stat-card"
+            className="card p-4 sm:p-6 stat-card"
           >
-            <div className="flex items-center justify-between mb-3">
-              <div className="bg-purple-100 p-3 rounded-xl">
-                <Building2 className="w-6 h-6 text-purple-600" />
+            <div className="flex items-center justify-between mb-2 sm:mb-3">
+              <div className="bg-purple-100 p-2 sm:p-3 rounded-xl">
+                <Building2 className="w-5 h-5 sm:w-6 sm:h-6 text-purple-600" />
               </div>
             </div>
-            <p className="text-3xl font-bold text-gray-900">{stats.organizations}</p>
-            <p className="text-sm text-gray-600 mt-1">Organisations</p>
+            <p className="text-2xl sm:text-3xl font-bold text-gray-900">{stats.organizations}</p>
+            <p className="text-xs sm:text-sm text-gray-600 mt-1">Organisations</p>
           </motion.div>
         </div>
 
         {/* Tabs */}
-        <div className="flex space-x-2 mb-6">
+        <div className="flex space-x-2 mb-6 tabs-scroll">
           <button
             onClick={() => setActiveTab('certificates')}
-            className={`flex items-center space-x-2 px-6 py-3 rounded-xl font-semibold transition-all ${activeTab === 'certificates'
+            className={`flex items-center space-x-2 px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl font-semibold transition-all whitespace-nowrap ${activeTab === 'certificates'
               ? 'bg-white shadow-lg text-blue-600 border-2 border-blue-200'
               : 'bg-white/50 text-gray-600 hover:bg-white'
               }`}
           >
             <Award className="w-5 h-5" />
-            <span>Mes Certificats</span>
+            <span className="hidden sm:inline">Mes Certificats</span>
             <span className={`px-2 py-0.5 rounded-full text-xs ${activeTab === 'certificates' ? 'bg-blue-100 text-blue-700' : 'bg-gray-200 text-gray-600'
               }`}>
               {stats.total}
@@ -535,13 +535,13 @@ export default function StudentDashboard({ studentAddress, onDisconnect, contrac
 
           <button
             onClick={() => setActiveTab('transactions')}
-            className={`flex items-center space-x-2 px-6 py-3 rounded-xl font-semibold transition-all ${activeTab === 'transactions'
+            className={`flex items-center space-x-2 px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl font-semibold transition-all whitespace-nowrap ${activeTab === 'transactions'
               ? 'bg-white shadow-lg text-cyan-600 border-2 border-cyan-200'
               : 'bg-white/50 text-gray-600 hover:bg-white'
               }`}
           >
             <Activity className="w-5 h-5" />
-            <span>Historique</span>
+            <span className="hidden sm:inline">Historique</span>
           </button>
         </div>
 
@@ -555,7 +555,7 @@ export default function StudentDashboard({ studentAddress, onDisconnect, contrac
               transition={{ duration: 0.3, delay: 0.5 }}
               className="bg-white rounded-2xl shadow-lg border border-gray-100 p-4 sm:p-6 mb-8"
             >
-              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+              <div className="flex flex-col gap-3 sm:gap-4">
                 <div className="flex-1 relative">
                   <Search className="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 text-gray-400" />
                   <input
@@ -567,35 +567,34 @@ export default function StudentDashboard({ studentAddress, onDisconnect, contrac
                   />
                 </div>
 
-                <div className="flex items-center space-x-2 sm:space-x-3">
-                  <Filter className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 flex-shrink-0" />
+                <div className="grid grid-cols-3 gap-2 sm:flex sm:items-center sm:space-x-3">
                   <select
                     value={filterStatus}
                     onChange={(e) => setFilterStatus(e.target.value)}
-                    className="flex-1 sm:flex-none px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
+                    className="w-full px-2 sm:px-4 py-2.5 sm:py-3 text-xs sm:text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
                   >
-                    <option value="all">Tous ({stats.total})</option>
-                    <option value="active">Actifs ({stats.active})</option>
-                    <option value="revoked">Révoqués ({stats.revoked})</option>
+                    <option value="all">Tous</option>
+                    <option value="active">Actifs</option>
+                    <option value="revoked">Révoqués</option>
                   </select>
                   <select
                     value={filterType}
                     onChange={(e) => setFilterType(e.target.value)}
-                    className="flex-1 sm:flex-none px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
+                    className="w-full px-2 sm:px-4 py-2.5 sm:py-3 text-xs sm:text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
                   >
-                    <option value="all">Tous les types</option>
+                    <option value="all">Types</option>
                     <option value="Diplôme">Diplôme</option>
-                    <option value="Certification">Certification</option>
-                    <option value="Formation">Formation</option>
-                    <option value="Attestation">Attestation</option>
+                    <option value="Certification">Certif.</option>
+                    <option value="Formation">Form.</option>
+                    <option value="Attestation">Attest.</option>
                   </select>
                   <select
                     value={sortOrder}
                     onChange={(e) => setSortOrder(e.target.value)}
-                    className="flex-1 sm:flex-none px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
+                    className="w-full px-2 sm:px-4 py-2.5 sm:py-3 text-xs sm:text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
                   >
-                    <option value="newest">Plus récents</option>
-                    <option value="oldest">Plus anciens</option>
+                    <option value="newest">Récents</option>
+                    <option value="oldest">Anciens</option>
                   </select>
                 </div>
               </div>
@@ -718,8 +717,8 @@ export default function StudentDashboard({ studentAddress, onDisconnect, contrac
                                   copyVerifyLink(cert.id);
                                 }}
                                 className={`inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-all ${copiedVerifyId === cert.id
-                                    ? 'bg-green-100 border border-green-300 text-green-700'
-                                    : 'bg-gray-50 hover:bg-gray-100 border border-gray-200 hover:border-gray-300 text-gray-600'
+                                  ? 'bg-green-100 border border-green-300 text-green-700'
+                                  : 'bg-gray-50 hover:bg-gray-100 border border-gray-200 hover:border-gray-300 text-gray-600'
                                   }`}
                                 title="Copier le lien de vérification"
                               >
@@ -824,8 +823,8 @@ export default function StudentDashboard({ studentAddress, onDisconnect, contrac
                                   copyVerifyLink(cert.id);
                                 }}
                                 className={`inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-all ${copiedVerifyId === cert.id
-                                    ? 'bg-green-100 border border-green-300 text-green-700'
-                                    : 'bg-gray-50 hover:bg-gray-100 border border-gray-200 hover:border-gray-300 text-gray-600'
+                                  ? 'bg-green-100 border border-green-300 text-green-700'
+                                  : 'bg-gray-50 hover:bg-gray-100 border border-gray-200 hover:border-gray-300 text-gray-600'
                                   }`}
                                 title="Copier le lien de vérification"
                               >
@@ -973,7 +972,7 @@ export default function StudentDashboard({ studentAddress, onDisconnect, contrac
                               )}
                             </button>
                             <a
-                              href={`https://sepolia.etherscan.io/tx/${tx.txHash}`}
+                              href={`${import.meta.env.VITE_ETHERSCAN_BASE_URL}/tx/${tx.txHash}`}
                               target="_blank"
                               rel="noopener noreferrer"
                               className="p-1 hover:bg-gray-100 rounded transition-colors"
@@ -991,7 +990,7 @@ export default function StudentDashboard({ studentAddress, onDisconnect, contrac
                                   {tx.ipfsHash.replace('ipfs://', '').slice(0, 8)}...{tx.ipfsHash.replace('ipfs://', '').slice(-6)}
                                 </code>
                                 <a
-                                  href={`https://ipfs.io/ipfs/${tx.ipfsHash.replace('ipfs://', '')}`}
+                                  href={`https://${import.meta.env.VITE_IPFS_PUBLIC_GATEWAY}/ipfs/${tx.ipfsHash.replace('ipfs://', '')}`}
                                   target="_blank"
                                   rel="noopener noreferrer"
                                   className="p-1 hover:bg-gray-100 rounded transition-colors"

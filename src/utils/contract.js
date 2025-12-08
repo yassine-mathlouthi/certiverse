@@ -2,7 +2,7 @@
 import { ethers } from "ethers";
 
 // Adresse de ton contrat déployé sur Sepolia
-export const CONTRACT_ADDRESS = "0xe6F2C948A7Ae5F28C8DFc7DEe81b113f6fE33904"; // ← À REMPLIR APRÈS DÉPLOIEMENT
+export const CONTRACT_ADDRESS = import.meta.env.VITE_CONTRACT_ADDRESS;
 
 // ABI du contrat (copie-colle depuis Remix après compilation)
 export const CONTRACT_ABI = [
@@ -34,7 +34,7 @@ export const initContract = async () => {
 // Obtenir une instance en lecture seule (sans signer)
 export const getContractReadOnly = () => {
   // Use public Sepolia RPC endpoint (Infura public endpoint)
-  const stableProvider = new ethers.JsonRpcProvider("https://ethereum-sepolia-rpc.publicnode.com");
+  const stableProvider = new ethers.JsonRpcProvider(import.meta.env.VITE_RPC_URL);
   return new ethers.Contract(CONTRACT_ADDRESS, CONTRACT_ABI, stableProvider);
 };
 export { contract, provider };

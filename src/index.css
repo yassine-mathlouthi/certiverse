@@ -69,7 +69,7 @@
   /* Gradients */
   --gradient-primary: linear-gradient(135deg, var(--color-primary-500), var(--color-accent-500));
   --gradient-secondary: linear-gradient(135deg, var(--color-secondary-500), var(--color-primary-500));
-  --gradient-mesh: 
+  --gradient-mesh:
     radial-gradient(at 40% 20%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
     radial-gradient(at 80% 0%, rgba(139, 92, 246, 0.15) 0px, transparent 50%),
     radial-gradient(at 0% 50%, rgba(6, 182, 212, 0.1) 0px, transparent 50%),
@@ -104,6 +104,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
@@ -111,16 +112,25 @@ body {
   background: var(--color-gray-50);
   color: var(--color-gray-900);
   line-height: 1.6;
+  overflow-x: hidden;
+  min-width: 320px;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-display);
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: -0.02em;
 }
 
-code, pre, .font-mono {
+code,
+pre,
+.font-mono {
   font-family: var(--font-mono);
 }
 
@@ -250,7 +260,7 @@ code, pre, .font-mono {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), transparent);
   opacity: 0;
   transition: opacity var(--transition-fast);
 }
@@ -310,8 +320,15 @@ code, pre, .font-mono {
 
 /* ----- Floating Animation ----- */
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 .animate-float {
@@ -325,10 +342,13 @@ code, pre, .font-mono {
 
 /* ----- Pulse Glow Animation ----- */
 @keyframes pulse-glow {
-  0%, 100% { 
+
+  0%,
+  100% {
     box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
   }
-  50% { 
+
+  50% {
     box-shadow: 0 0 40px rgba(99, 102, 241, 0.5);
   }
 }
@@ -339,17 +359,20 @@ code, pre, .font-mono {
 
 /* ----- Shimmer Animation ----- */
 @keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
 }
 
 .animate-shimmer {
-  background: linear-gradient(
-    90deg,
-    var(--color-gray-200) 0%,
-    var(--color-gray-100) 50%,
-    var(--color-gray-200) 100%
-  );
+  background: linear-gradient(90deg,
+      var(--color-gray-200) 0%,
+      var(--color-gray-100) 50%,
+      var(--color-gray-200) 100%);
   background-size: 200% 100%;
   animation: shimmer 1.5s ease-in-out infinite;
 }
@@ -528,12 +551,10 @@ code, pre, .font-mono {
 
 /* ----- Loading Skeleton ----- */
 .skeleton {
-  background: linear-gradient(
-    90deg,
-    var(--color-gray-200) 0%,
-    var(--color-gray-100) 50%,
-    var(--color-gray-200) 100%
-  );
+  background: linear-gradient(90deg,
+      var(--color-gray-200) 0%,
+      var(--color-gray-100) 50%,
+      var(--color-gray-200) 100%);
   background-size: 200% 100%;
   animation: shimmer 1.5s ease-in-out infinite;
   border-radius: var(--radius-md);
@@ -547,6 +568,7 @@ code, pre, .font-mono {
 
 /* ----- Reduced Motion ----- */
 @media (prefers-reduced-motion: reduce) {
+
   *,
   ::before,
   ::after {
@@ -554,6 +576,82 @@ code, pre, .font-mono {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* ----- Mobile Responsiveness ----- */
+@media (max-width: 640px) {
+
+  /* Scale down gradient orbs on mobile to prevent overflow */
+  .gradient-orb-1 {
+    width: 200px;
+    height: 200px;
+    top: -50px;
+    left: -50px;
+  }
+
+  .gradient-orb-2 {
+    width: 150px;
+    height: 150px;
+    right: -30px;
+  }
+
+  .gradient-orb-3 {
+    width: 180px;
+    height: 180px;
+    bottom: -50px;
+  }
+
+  /* Reduce table padding on mobile */
+  .table-modern thead th,
+  .table-modern tbody td {
+    padding: 0.75rem 1rem;
+  }
+
+  /* Smaller cards on mobile */
+  .card {
+    border-radius: var(--radius-xl);
+  }
+
+  /* Smaller buttons on mobile */
+  .btn-primary,
+  .btn-secondary {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.875rem;
+  }
+}
+
+/* Hide on mobile utility */
+.hide-mobile {
+  display: block;
+}
+
+@media (max-width: 640px) {
+  .hide-mobile {
+    display: none !important;
+  }
+}
+
+/* Show only on mobile utility */
+.show-mobile {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .show-mobile {
+    display: block !important;
+  }
+}
+
+/* Scrollable tabs container */
+.tabs-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.tabs-scroll::-webkit-scrollbar {
+  display: none;
 }
 
 /* ----- Print Styles ----- */

@@ -12,22 +12,22 @@ function HomePage({ onConnectWallet, onNavigateToEmployer }) {
 
       {/* Navigation */}
       <nav className="glass sticky top-0 z-50 border-b border-white/20">
-        <div className="max-w-7xl mx-auto px-6 py-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4">
           <div className="flex items-center justify-between">
             <motion.div
-              className="flex items-center space-x-3"
+              className="flex items-center space-x-2 sm:space-x-3"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <div className="bg-gradient-primary p-2.5 rounded-xl shadow-lg glow">
-                <Shield className="w-7 h-7 text-white" />
+              <div className="bg-gradient-primary p-2 sm:p-2.5 rounded-xl shadow-lg glow">
+                <Shield className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
               </div>
               <div>
-                <h1 className="text-2xl font-bold gradient-text font-display">
+                <h1 className="text-xl sm:text-2xl font-bold gradient-text font-display">
                   CertiVerse
                 </h1>
-                <p className="text-xs text-gray-500">Certification sur Blockchain</p>
+                <p className="text-xs text-gray-500 hidden sm:block">Certification sur Blockchain</p>
               </div>
             </motion.div>
 
@@ -37,10 +37,10 @@ function HomePage({ onConnectWallet, onNavigateToEmployer }) {
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
-                className="group px-5 py-2.5 glass-dark rounded-xl font-medium flex items-center space-x-2 hover:shadow-lg transition-all duration-300 border border-gray-200/50"
+                className="group px-3 sm:px-5 py-2 sm:py-2.5 glass-dark rounded-xl font-medium flex items-center space-x-2 hover:shadow-lg transition-all duration-300 border border-gray-200/50"
               >
                 <CheckCircle className="w-5 h-5 text-[var(--color-primary-500)] group-hover:scale-110 transition-transform" />
-                <span className="text-gray-700 group-hover:text-[var(--color-primary-600)]">Employer Portal</span>
+                <span className="text-gray-700 group-hover:text-[var(--color-primary-600)] hidden sm:inline">Employer Portal</span>
               </motion.button>
             )}
           </div>
@@ -48,8 +48,8 @@ function HomePage({ onConnectWallet, onNavigateToEmployer }) {
       </nav>
 
       {/* Hero Section */}
-      <main className="max-w-7xl mx-auto px-6 py-20 relative z-10">
-        <div className="text-center mb-20">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 py-10 sm:py-20 relative z-10">
+        <div className="text-center mb-10 sm:mb-20">
           <motion.div
             className="inline-flex items-center space-x-2 badge badge-primary mb-8"
             initial={{ opacity: 0, y: 20 }}
@@ -61,7 +61,7 @@ function HomePage({ onConnectWallet, onNavigateToEmployer }) {
           </motion.div>
 
           <motion.h2
-            className="text-5xl md:text-7xl font-bold text-gray-900 mb-8 leading-tight font-display"
+            className="text-3xl sm:text-5xl md:text-7xl font-bold text-gray-900 mb-6 sm:mb-8 leading-tight font-display"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
@@ -74,7 +74,7 @@ function HomePage({ onConnectWallet, onNavigateToEmployer }) {
           </motion.h2>
 
           <motion.p
-            className="text-xl text-gray-600 max-w-2xl mx-auto mb-14 leading-relaxed"
+            className="text-base sm:text-xl text-gray-600 max-w-2xl mx-auto mb-8 sm:mb-14 leading-relaxed px-2"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.5 }}
@@ -91,7 +91,7 @@ function HomePage({ onConnectWallet, onNavigateToEmployer }) {
           >
             <button
               onClick={onConnectWallet}
-              className="group relative px-8 py-4 bg-gradient-primary text-white rounded-2xl font-semibold text-lg shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 flex items-center space-x-3 glow-hover overflow-hidden"
+              className="group relative px-6 sm:px-8 py-3 sm:py-4 bg-gradient-primary text-white rounded-2xl font-semibold text-base sm:text-lg shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 flex items-center space-x-2 sm:space-x-3 glow-hover overflow-hidden"
             >
               {/* Shimmer effect */}
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
@@ -143,13 +143,13 @@ function HomePage({ onConnectWallet, onNavigateToEmployer }) {
 
         {/* Feature Cards */}
         <motion.div
-          className="grid md:grid-cols-3 gap-8 mt-28"
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mt-16 sm:mt-28"
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.7 }}
         >
           <motion.div
-            className="card p-8 group"
+            className="card p-6 sm:p-8 group"
             whileHover={{ y: -8, rotateY: 5 }}
             transition={{ type: "spring", stiffness: 300 }}
           >
@@ -166,7 +166,7 @@ function HomePage({ onConnectWallet, onNavigateToEmployer }) {
           </motion.div>
 
           <motion.div
-            className="card p-8 group"
+            className="card p-6 sm:p-8 group"
             whileHover={{ y: -8, rotateY: -5 }}
             transition={{ type: "spring", stiffness: 300 }}
           >
@@ -183,7 +183,7 @@ function HomePage({ onConnectWallet, onNavigateToEmployer }) {
           </motion.div>
 
           <motion.div
-            className="card p-8 group"
+            className="card p-6 sm:p-8 group"
             whileHover={{ y: -8, rotateY: 5 }}
             transition={{ type: "spring", stiffness: 300 }}
           >
@@ -202,21 +202,21 @@ function HomePage({ onConnectWallet, onNavigateToEmployer }) {
 
         {/* CTA Section */}
         <motion.div
-          className="mt-28 relative"
+          className="mt-16 sm:mt-28 relative"
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.8 }}
         >
-          <div className="absolute inset-0 bg-gradient-primary rounded-3xl blur-xl opacity-20 animate-pulse-glow"></div>
-          <div className="relative bg-gradient-primary rounded-3xl p-14 text-center text-white shadow-2xl overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-primary rounded-2xl sm:rounded-3xl blur-xl opacity-20 animate-pulse-glow"></div>
+          <div className="relative bg-gradient-primary rounded-2xl sm:rounded-3xl p-6 sm:p-14 text-center text-white shadow-2xl overflow-hidden">
             {/* Decorative elements */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
             <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
 
-            <h3 className="text-4xl font-bold mb-5 relative z-10 font-display">
+            <h3 className="text-2xl sm:text-4xl font-bold mb-4 sm:mb-5 relative z-10 font-display">
               Prêt à sécuriser vos certifications ?
             </h3>
-            <p className="text-xl text-white/90 mb-10 relative z-10">
+            <p className="text-base sm:text-xl text-white/90 mb-6 sm:mb-10 relative z-10">
               Rejoignez des milliers d'organisations et d'utilisateurs qui font confiance à CertiVerse
             </p>
             <button
@@ -230,13 +230,13 @@ function HomePage({ onConnectWallet, onNavigateToEmployer }) {
       </main>
 
       {/* Footer */}
-      <footer className="bg-gradient-to-b from-gray-900 to-gray-950 text-gray-300 mt-28 relative z-10">
+      <footer className="bg-gradient-to-b from-gray-900 to-gray-950 text-gray-300 mt-16 sm:mt-28 relative z-10">
         {/* Top accent line */}
         <div className="h-1 bg-gradient-primary"></div>
 
-        <div className="max-w-7xl mx-auto px-6 py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10 sm:py-16">
           {/* Main Footer Content */}
-          <div className="grid md:grid-cols-4 gap-12 mb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-12 mb-8 sm:mb-12">
             {/* Brand Column */}
             <div className="md:col-span-2">
               <div className="flex items-center space-x-3 mb-6">

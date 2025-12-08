@@ -299,18 +299,18 @@ export default function AdminDashboard({ adminAddress, onDisconnect, contract })
 
       {/* Header */}
       <header className="glass sticky top-0 z-40 border-b border-white/20">
-        <div className="max-w-7xl mx-auto px-6 py-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4">
           <div className="flex items-center justify-between">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
             >
-              <h1 className="text-2xl font-bold text-gray-900 font-display">Administration</h1>
-              <p className="text-sm text-gray-500">Gestion des Organisations</p>
+              <h1 className="text-xl sm:text-2xl font-bold text-gray-900 font-display">Administration</h1>
+              <p className="text-xs sm:text-sm text-gray-500 hidden sm:block">Gestion des Organisations</p>
             </motion.div>
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-2 sm:space-x-4">
               <motion.div
-                className="bg-gradient-primary px-5 py-2.5 rounded-xl cursor-pointer hover:shadow-lg transition-all glow-hover"
+                className="hidden sm:block bg-gradient-primary px-3 sm:px-5 py-2 sm:py-2.5 rounded-xl cursor-pointer hover:shadow-lg transition-all glow-hover"
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
               >
@@ -329,22 +329,22 @@ export default function AdminDashboard({ adminAddress, onDisconnect, contract })
               </motion.div>
               <motion.button
                 onClick={onDisconnect}
-                className="flex items-center space-x-2 px-4 py-2.5 bg-red-50 text-red-600 rounded-xl hover:bg-red-100 font-medium transition-all"
+                className="flex items-center space-x-1 sm:space-x-2 px-3 sm:px-4 py-2 sm:py-2.5 bg-red-50 text-red-600 rounded-xl hover:bg-red-100 font-medium transition-all"
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.1 }}
               >
                 <LogOut className="w-4 h-4" />
-                <span>Déconnexion</span>
+                <span className="hidden sm:inline">Déconnexion</span>
               </motion.button>
             </div>
           </div>
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-6 py-8 relative z-10">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8 relative z-10">
         {/* Stats */}
-        <div className="grid md:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6 mb-6 sm:mb-8">
           {[
             { label: 'Total Organisations', value: stats.totalOrgs, icon: Building2, gradient: 'from-[var(--color-primary-500)] to-[var(--color-primary-600)]' },
             { label: 'Organisations Actives', value: stats.activeOrgs, icon: CheckCircle, gradient: 'from-emerald-500 to-emerald-600' },
@@ -353,47 +353,47 @@ export default function AdminDashboard({ adminAddress, onDisconnect, contract })
           ].map((stat, index) => (
             <motion.div
               key={stat.label}
-              className="card p-6 stat-card"
+              className="card p-4 sm:p-6 stat-card"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
             >
-              <div className="flex items-center justify-between mb-4">
-                <div className={`bg-gradient-to-br ${stat.gradient} p-3 rounded-xl shadow-lg`}>
-                  <stat.icon className="w-6 h-6 text-white" />
+              <div className="flex items-center justify-between mb-2 sm:mb-4">
+                <div className={`bg-gradient-to-br ${stat.gradient} p-2 sm:p-3 rounded-xl shadow-lg`}>
+                  <stat.icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                 </div>
-                <TrendingUp className="w-5 h-5 text-gray-400" />
+                <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 hidden sm:block" />
               </div>
-              <p className="text-3xl font-bold text-gray-900 font-display">{stat.value}</p>
-              <p className="text-sm text-gray-500 mt-1">{stat.label}</p>
+              <p className="text-2xl sm:text-3xl font-bold text-gray-900 font-display">{stat.value}</p>
+              <p className="text-xs sm:text-sm text-gray-500 mt-1 line-clamp-1">{stat.label}</p>
             </motion.div>
           ))}
         </div>
 
         {/* Tabs */}
-        <div className="flex space-x-2 mb-6">
+        <div className="flex space-x-2 mb-6 tabs-scroll">
           <button
             onClick={() => setActiveTab('table')}
-            className={`flex items-center space-x-2 px-6 py-3 rounded-xl font-semibold transition-all ${activeTab === 'table'
+            className={`flex items-center space-x-2 px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl font-semibold transition-all whitespace-nowrap ${activeTab === 'table'
               ? 'bg-white shadow-lg text-[var(--color-primary-600)] border-2 border-[var(--color-primary-200)]'
               : 'bg-white/50 text-gray-600 hover:bg-white'
               }`}
           >
             <Building2 className="w-5 h-5" />
-            <span>Organisations</span>
+            <span className="hidden sm:inline">Organisations</span>
             <span className={`px-2 py-0.5 rounded-full text-xs ${activeTab === 'table' ? 'bg-[var(--color-primary-100)] text-[var(--color-primary-700)]' : 'bg-gray-200 text-gray-600'}`}>
               {stats.totalOrgs}
             </span>
           </button>
           <button
             onClick={() => setActiveTab('analytics')}
-            className={`flex items-center space-x-2 px-6 py-3 rounded-xl font-semibold transition-all ${activeTab === 'analytics'
+            className={`flex items-center space-x-2 px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl font-semibold transition-all whitespace-nowrap ${activeTab === 'analytics'
               ? 'bg-white shadow-lg text-purple-600 border-2 border-purple-200'
               : 'bg-white/50 text-gray-600 hover:bg-white'
               }`}
           >
             <Activity className="w-5 h-5" />
-            <span>Analytique</span>
+            <span className="hidden sm:inline">Analytique</span>
           </button>
         </div>
 
@@ -405,12 +405,12 @@ export default function AdminDashboard({ adminAddress, onDisconnect, contract })
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
           >
-            <div className="p-6 border-b border-gray-100">
+            <div className="p-4 sm:p-6 border-b border-gray-100">
               <div className="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0 mb-6">
-                <h2 className="text-xl font-bold text-gray-900 font-display">Organisations Enregistrées</h2>
+                <h2 className="text-lg sm:text-xl font-bold text-gray-900 font-display">Organisations Enregistrées</h2>
                 <button
                   onClick={() => setShowAddForm(true)}
-                  className="btn-primary flex items-center space-x-2"
+                  className="btn-primary flex items-center justify-center space-x-2 w-full sm:w-auto"
                 >
                   <Plus className="w-5 h-5" />
                   <span>Ajouter une organisation</span>
@@ -418,24 +418,23 @@ export default function AdminDashboard({ adminAddress, onDisconnect, contract })
               </div>
 
               {/* Enhanced Filters */}
-              <div className="flex flex-col lg:flex-row gap-4">
+              <div className="flex flex-col gap-3 sm:gap-4">
                 <div className="flex-1 relative">
                   <Search className="w-5 h-5 text-gray-400 absolute left-4 top-1/2 transform -translate-y-1/2" />
                   <input
                     type="text"
-                    placeholder="Rechercher par adresse ou nom..."
+                    placeholder="Rechercher..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="input-modern"
+                    className="input-modern w-full"
                     style={{ paddingLeft: '3rem' }}
                   />
                 </div>
-                <div className="flex gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3">
                   <select
                     value={searchType}
                     onChange={(e) => setSearchType(e.target.value)}
-                    className="input-modern w-full md:w-auto appearance-none cursor-pointer"
-                    style={{ minWidth: '200px' }}
+                    className="input-modern w-full appearance-none cursor-pointer text-sm sm:text-base"
                   >
                     <option value="all">Tous les types</option>
                     <option value="Université">Université</option>
@@ -446,8 +445,7 @@ export default function AdminDashboard({ adminAddress, onDisconnect, contract })
                   <select
                     value={searchStatus}
                     onChange={(e) => setSearchStatus(e.target.value)}
-                    className="input-modern w-full md:w-auto"
-                    style={{ minWidth: '140px' }}
+                    className="input-modern w-full text-sm sm:text-base"
                   >
                     <option value="all">Tous statuts</option>
                     <option value="actif">Actif</option>
@@ -456,8 +454,7 @@ export default function AdminDashboard({ adminAddress, onDisconnect, contract })
                   <select
                     value={sortOrder}
                     onChange={(e) => setSortOrder(e.target.value)}
-                    className="input-modern w-full md:w-auto"
-                    style={{ minWidth: '140px' }}
+                    className="input-modern w-full text-sm sm:text-base"
                   >
                     <option value="recent">Plus récent</option>
                     <option value="oldest">Plus ancien</option>
@@ -625,11 +622,11 @@ export default function AdminDashboard({ adminAddress, onDisconnect, contract })
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
           >
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
               {/* Organisations par type */}
-              <div className="card p-6">
-                <h3 className="text-lg font-bold text-gray-900 mb-6 font-display flex items-center gap-2">
-                  <Building2 className="w-5 h-5 text-[var(--color-primary-500)]" />
+              <div className="card p-4 sm:p-6">
+                <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-4 sm:mb-6 font-display flex items-center gap-2">
+                  <Building2 className="w-4 h-4 sm:w-5 sm:h-5 text-[var(--color-primary-500)]" />
                   Répartition par Type
                 </h3>
                 <div className="space-y-4">
@@ -666,26 +663,26 @@ export default function AdminDashboard({ adminAddress, onDisconnect, contract })
               </div>
 
               {/* Top organisations */}
-              <div className="card p-6">
-                <h3 className="text-lg font-bold text-gray-900 mb-6 font-display flex items-center gap-2">
-                  <Award className="w-5 h-5 text-[var(--color-accent-500)]" />
+              <div className="card p-4 sm:p-6">
+                <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-4 sm:mb-6 font-display flex items-center gap-2">
+                  <Award className="w-4 h-4 sm:w-5 sm:h-5 text-[var(--color-accent-500)]" />
                   Top 5 Organisations
                 </h3>
                 <div className="space-y-3">
                   {getTopOrgs().map((org, index) => {
                     const typeConfig = getTypeConfig(org.type);
                     return (
-                      <div key={org.address} className="flex items-center gap-4 p-3 bg-gray-50 rounded-xl">
-                        <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-white ${index === 0 ? 'bg-yellow-500' : index === 1 ? 'bg-gray-400' : index === 2 ? 'bg-orange-400' : 'bg-gray-300'
+                      <div key={org.address} className="flex items-center gap-3 sm:gap-4 p-2 sm:p-3 bg-gray-50 rounded-xl">
+                        <div className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center font-bold text-sm sm:text-base text-white ${index === 0 ? 'bg-yellow-500' : index === 1 ? 'bg-gray-400' : index === 2 ? 'bg-orange-400' : 'bg-gray-300'
                           }`}>
                           {index + 1}
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className="font-semibold text-gray-900 truncate">{org.name}</p>
+                          <p className="font-semibold text-gray-900 truncate text-sm sm:text-base">{org.name}</p>
                           <p className="text-xs text-gray-500">{org.type}</p>
                         </div>
                         <div className="text-right">
-                          <p className="text-lg font-bold text-[var(--color-primary-600)]">{org.certificates}</p>
+                          <p className="text-base sm:text-lg font-bold text-[var(--color-primary-600)]">{org.certificates}</p>
                           <p className="text-xs text-gray-500">certificats</p>
                         </div>
                       </div>
@@ -698,29 +695,29 @@ export default function AdminDashboard({ adminAddress, onDisconnect, contract })
               </div>
 
               {/* Statistiques globales */}
-              <div className="card p-6 md:col-span-2">
-                <h3 className="text-lg font-bold text-gray-900 mb-6 font-display flex items-center gap-2">
-                  <TrendingUp className="w-5 h-5 text-emerald-500" />
+              <div className="card p-4 sm:p-6 md:col-span-2">
+                <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-4 sm:mb-6 font-display flex items-center gap-2">
+                  <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-500" />
                   Vue d'Ensemble
                 </h3>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                  <div className="text-center p-4 bg-blue-50 rounded-2xl">
-                    <p className="text-3xl font-bold text-blue-600 font-display">{stats.activeOrgs}</p>
-                    <p className="text-sm text-gray-600 mt-1">Organisations Actives</p>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6">
+                  <div className="text-center p-3 sm:p-4 bg-blue-50 rounded-xl sm:rounded-2xl">
+                    <p className="text-2xl sm:text-3xl font-bold text-blue-600 font-display">{stats.activeOrgs}</p>
+                    <p className="text-xs sm:text-sm text-gray-600 mt-1">Orgs Actives</p>
                   </div>
-                  <div className="text-center p-4 bg-red-50 rounded-2xl">
-                    <p className="text-3xl font-bold text-red-600 font-display">{stats.totalOrgs - stats.activeOrgs}</p>
-                    <p className="text-sm text-gray-600 mt-1">Organisations Révoquées</p>
+                  <div className="text-center p-3 sm:p-4 bg-red-50 rounded-xl sm:rounded-2xl">
+                    <p className="text-2xl sm:text-3xl font-bold text-red-600 font-display">{stats.totalOrgs - stats.activeOrgs}</p>
+                    <p className="text-xs sm:text-sm text-gray-600 mt-1">Orgs Révoquées</p>
                   </div>
-                  <div className="text-center p-4 bg-emerald-50 rounded-2xl">
-                    <p className="text-3xl font-bold text-emerald-600 font-display">{stats.totalCertificates - stats.revokedCertificates}</p>
-                    <p className="text-sm text-gray-600 mt-1">Certificats Valides</p>
+                  <div className="text-center p-3 sm:p-4 bg-emerald-50 rounded-xl sm:rounded-2xl">
+                    <p className="text-2xl sm:text-3xl font-bold text-emerald-600 font-display">{stats.totalCertificates - stats.revokedCertificates}</p>
+                    <p className="text-xs sm:text-sm text-gray-600 mt-1">Certs Valides</p>
                   </div>
-                  <div className="text-center p-4 bg-purple-50 rounded-2xl">
-                    <p className="text-3xl font-bold text-purple-600 font-display">
+                  <div className="text-center p-3 sm:p-4 bg-purple-50 rounded-xl sm:rounded-2xl">
+                    <p className="text-2xl sm:text-3xl font-bold text-purple-600 font-display">
                       {stats.totalOrgs > 0 ? Math.round(stats.totalCertificates / stats.totalOrgs) : 0}
                     </p>
-                    <p className="text-sm text-gray-600 mt-1">Moyenne par Org</p>
+                    <p className="text-xs sm:text-sm text-gray-600 mt-1">Moy. par Org</p>
                   </div>
                 </div>
               </div>

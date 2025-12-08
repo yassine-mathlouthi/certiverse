@@ -206,7 +206,7 @@ export const generateCertificateHTML = (certData) => {
       <div class="header-right">
         <div class="cert-id-top">ID: ${certId}</div>
         <div class="qr-code-header">
-          <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://certiverse-six.vercel.app/verify/${numericId}" alt="QR Code">
+          <img src="${import.meta.env.VITE_QR_API_URL}/?size=150x150&data=${import.meta.env.VITE_APP_BASE_URL}/verify/${numericId}" alt="QR Code">
         </div>
       </div>
     </div>

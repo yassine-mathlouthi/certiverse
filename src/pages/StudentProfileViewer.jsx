@@ -104,22 +104,22 @@ function StudentProfileViewer({ onBack }) {
 
             {/* Header */}
             <nav className="glass sticky top-0 z-50 border-b border-white/20">
-                <div className="max-w-7xl mx-auto px-6 py-4">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4">
                     <div className="flex items-center justify-between">
                         <motion.div
-                            className="flex items-center space-x-3"
+                            className="flex items-center space-x-2 sm:space-x-3"
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.5 }}
                         >
-                            <div className="bg-gradient-primary p-2.5 rounded-xl shadow-lg glow">
-                                <User className="w-7 h-7 text-white" />
+                            <div className="bg-gradient-primary p-2 sm:p-2.5 rounded-xl shadow-lg glow">
+                                <User className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
                             </div>
                             <div>
-                                <h1 className="text-2xl font-bold gradient-text font-display">
+                                <h1 className="text-xl sm:text-2xl font-bold gradient-text font-display">
                                     CertiVerse
                                 </h1>
-                                <p className="text-xs text-gray-500">Profil Étudiant</p>
+                                <p className="text-xs text-gray-500 hidden sm:block">Profil Étudiant</p>
                             </div>
                         </motion.div>
                         {onBack && (
@@ -128,10 +128,10 @@ function StudentProfileViewer({ onBack }) {
                                 initial={{ opacity: 0, x: 20 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ duration: 0.5, delay: 0.2 }}
-                                className="flex items-center space-x-2 text-gray-600 hover:text-[var(--color-primary-600)] transition-colors px-4 py-2 rounded-xl hover:bg-white/50"
+                                className="flex items-center space-x-1 sm:space-x-2 text-gray-600 hover:text-[var(--color-primary-600)] transition-colors px-3 sm:px-4 py-2 rounded-xl hover:bg-white/50"
                             >
                                 <ArrowLeft className="w-5 h-5" />
-                                <span className="font-medium">Retour</span>
+                                <span className="font-medium hidden sm:inline">Retour</span>
                             </motion.button>
                         )}
                     </div>
@@ -139,29 +139,29 @@ function StudentProfileViewer({ onBack }) {
             </nav>
 
             {/* Main Content */}
-            <main className="max-w-7xl mx-auto px-6 py-12 relative z-10">
+            <main className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12 relative z-10">
                 {/* Hero Section */}
                 <motion.div
-                    className="text-center mb-12"
+                    className="text-center mb-8 sm:mb-12"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
                 >
-                    <div className="inline-flex items-center space-x-2 badge badge-primary mb-6">
+                    <div className="inline-flex items-center space-x-2 badge badge-primary mb-4 sm:mb-6">
                         <Sparkles className="w-4 h-4" />
                         <span>Visualiseur de Profil</span>
                     </div>
-                    <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 font-display">
+                    <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-3 sm:mb-4 font-display">
                         Rechercher un <span className="gradient-text">Profil Étudiant</span>
                     </h2>
-                    <p className="text-lg text-gray-600 max-w-xl mx-auto">
+                    <p className="text-base sm:text-lg text-gray-600 max-w-xl mx-auto px-2">
                         Consultez tous les certificats et compétences d'un étudiant enregistrés sur la blockchain
                     </p>
                 </motion.div>
 
                 {/* Search Section */}
                 <motion.div
-                    className="card p-8 mb-8"
+                    className="card p-4 sm:p-8 mb-6 sm:mb-8"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.1 }}
@@ -236,71 +236,71 @@ function StudentProfileViewer({ onBack }) {
                             transition={{ type: "spring", stiffness: 200 }}
                         >
                             {/* Summary Stats */}
-                            <div className="grid md:grid-cols-4 gap-6 mb-8">
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6 mb-6 sm:mb-8">
                                 <motion.div
-                                    className="card p-6 stat-card"
+                                    className="card p-4 sm:p-6 stat-card"
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: 0.1 }}
                                 >
                                     <div className="flex items-center justify-between">
                                         <div>
-                                            <p className="text-gray-500 text-sm font-medium mb-1">Certificats Actifs</p>
-                                            <p className="text-3xl font-bold text-gray-900 font-display">{activeCertificates.length}</p>
+                                            <p className="text-gray-500 text-xs sm:text-sm font-medium mb-1">Certificats Actifs</p>
+                                            <p className="text-2xl sm:text-3xl font-bold text-gray-900 font-display">{activeCertificates.length}</p>
                                         </div>
-                                        <div className="bg-gradient-to-br from-[var(--color-primary-500)] to-[var(--color-primary-600)] p-3 rounded-xl shadow-lg">
-                                            <Award className="w-8 h-8 text-white" />
+                                        <div className="bg-gradient-to-br from-[var(--color-primary-500)] to-[var(--color-primary-600)] p-2 sm:p-3 rounded-xl shadow-lg">
+                                            <Award className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
                                         </div>
                                     </div>
                                 </motion.div>
 
                                 <motion.div
-                                    className="card p-6 stat-card"
+                                    className="card p-4 sm:p-6 stat-card"
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: 0.2 }}
                                 >
                                     <div className="flex items-center justify-between">
                                         <div>
-                                            <p className="text-gray-500 text-sm font-medium mb-1">Organisations</p>
-                                            <p className="text-3xl font-bold text-gray-900 font-display">{getUniqueOrganizations().length}</p>
+                                            <p className="text-gray-500 text-xs sm:text-sm font-medium mb-1">Organisations</p>
+                                            <p className="text-2xl sm:text-3xl font-bold text-gray-900 font-display">{getUniqueOrganizations().length}</p>
                                         </div>
-                                        <div className="bg-gradient-to-br from-[var(--color-secondary-500)] to-[var(--color-secondary-600)] p-3 rounded-xl shadow-lg">
-                                            <Building2 className="w-8 h-8 text-white" />
+                                        <div className="bg-gradient-to-br from-[var(--color-secondary-500)] to-[var(--color-secondary-600)] p-2 sm:p-3 rounded-xl shadow-lg">
+                                            <Building2 className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
                                         </div>
                                     </div>
                                 </motion.div>
 
                                 <motion.div
-                                    className="card p-6 stat-card"
+                                    className="card p-4 sm:p-6 stat-card"
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: 0.3 }}
                                 >
                                     <div className="flex items-center justify-between">
                                         <div>
-                                            <p className="text-gray-500 text-sm font-medium mb-1">Types</p>
-                                            <p className="text-3xl font-bold text-gray-900 font-display">{getCertificateTypes().length}</p>
+                                            <p className="text-gray-500 text-xs sm:text-sm font-medium mb-1">Types</p>
+                                            <p className="text-2xl sm:text-3xl font-bold text-gray-900 font-display">{getCertificateTypes().length}</p>
                                         </div>
-                                        <div className="bg-gradient-to-br from-[var(--color-success-500)] to-emerald-600 p-3 rounded-xl shadow-lg">
-                                            <Shield className="w-8 h-8 text-white" />
+                                        <div className="bg-gradient-to-br from-[var(--color-success-500)] to-emerald-600 p-2 sm:p-3 rounded-xl shadow-lg">
+                                            <Shield className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
                                         </div>
                                     </div>
                                 </motion.div>
 
                                 <motion.div
-                                    className="card p-6 stat-card"
+                                    className="card p-4 sm:p-6 stat-card"
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: 0.4 }}
                                 >
                                     <div className="flex items-center justify-between">
                                         <div>
-                                            <p className="text-gray-500 text-sm font-medium mb-1">Total</p>
-                                            <p className="text-3xl font-bold text-gray-900 font-display">{certificates.length}</p>
+                                            <p className="text-gray-500 text-xs sm:text-sm font-medium mb-1">Total</p>
+                                            <p className="text-2xl sm:text-3xl font-bold text-gray-900 font-display">{certificates.length}</p>
                                         </div>
-                                        <div className="bg-gradient-to-br from-orange-500 to-orange-600 p-3 rounded-xl shadow-lg">
-                                            <Calendar className="w-8 h-8 text-white" />
+                                        <div className="bg-gradient-to-br from-orange-500 to-orange-600 p-2 sm:p-3 rounded-xl shadow-lg">
+                                            <Calendar className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
                                         </div>
                                     </div>
                                 </motion.div>
@@ -308,29 +308,29 @@ function StudentProfileViewer({ onBack }) {
 
                             {/* Student Info Card */}
                             <motion.div
-                                className="card p-6 mb-8"
+                                className="card p-4 sm:p-6 mb-6 sm:mb-8"
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.5 }}
                             >
-                                <h3 className="text-xl font-bold text-gray-900 mb-6 font-display flex items-center gap-3">
-                                    <User className="w-6 h-6 text-[var(--color-primary-500)]" />
+                                <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-4 sm:mb-6 font-display flex items-center gap-2 sm:gap-3">
+                                    <User className="w-5 h-5 sm:w-6 sm:h-6 text-[var(--color-primary-500)]" />
                                     Informations Étudiant
                                 </h3>
-                                <div className="grid md:grid-cols-2 gap-6">
-                                    <div className="bg-gray-50 rounded-xl p-4">
-                                        <label className="text-sm font-semibold text-gray-500 mb-2 block">Nom</label>
-                                        <p className="text-lg font-bold text-gray-900">{certificates[0]?.studentName || 'N/A'}</p>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+                                    <div className="bg-gray-50 rounded-xl p-3 sm:p-4">
+                                        <label className="text-xs sm:text-sm font-semibold text-gray-500 mb-2 block">Nom</label>
+                                        <p className="text-base sm:text-lg font-bold text-gray-900">{certificates[0]?.studentName || 'N/A'}</p>
                                     </div>
-                                    <div className="bg-gray-50 rounded-xl p-4">
-                                        <label className="text-sm font-semibold text-gray-500 mb-2 block">Adresse du Portefeuille</label>
+                                    <div className="bg-gray-50 rounded-xl p-3 sm:p-4">
+                                        <label className="text-xs sm:text-sm font-semibold text-gray-500 mb-2 block">Adresse du Portefeuille</label>
                                         <div className="flex items-center space-x-2">
-                                            <code className="text-sm font-mono text-gray-900">{studentAddress.slice(0, 10)}...{studentAddress.slice(-8)}</code>
+                                            <code className="text-xs sm:text-sm font-mono text-gray-900 truncate">{studentAddress.slice(0, 10)}...{studentAddress.slice(-8)}</code>
                                             <a
                                                 href={`https://sepolia.etherscan.io/address/${studentAddress}`}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="p-2 hover:bg-gray-200 rounded-lg transition-colors"
+                                                className="p-2 hover:bg-gray-200 rounded-lg transition-colors flex-shrink-0"
                                             >
                                                 <ExternalLink className="w-4 h-4 text-[var(--color-primary-600)]" />
                                             </a>
@@ -341,46 +341,46 @@ function StudentProfileViewer({ onBack }) {
 
                             {/* Active Certificates */}
                             <motion.div
-                                className="mb-8"
+                                className="mb-6 sm:mb-8"
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.6 }}
                             >
-                                <h3 className="text-2xl font-bold text-gray-900 mb-6 font-display flex items-center gap-3">
-                                    <Award className="w-7 h-7 text-[var(--color-primary-500)]" />
+                                <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6 font-display flex items-center gap-2 sm:gap-3">
+                                    <Award className="w-6 h-6 sm:w-7 sm:h-7 text-[var(--color-primary-500)]" />
                                     Certificats Actifs
                                 </h3>
                                 <div className="space-y-3">
                                     {activeCertificates.map((cert, index) => (
                                         <motion.div
                                             key={cert.id}
-                                            className="card p-5 flex items-center justify-between hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-[var(--color-primary-200)]"
+                                            className="card p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-[var(--color-primary-200)]"
                                             initial={{ opacity: 0, x: -20 }}
                                             animate={{ opacity: 1, x: 0 }}
                                             transition={{ delay: 0.1 * index }}
                                         >
-                                            <div className="flex items-center space-x-4 flex-1">
-                                                <span className={`badge ${getCertTypeBadgeClass(cert.certType)}`}>
+                                            <div className="flex items-start sm:items-center space-x-3 sm:space-x-4 flex-1 min-w-0">
+                                                <span className={`badge ${getCertTypeBadgeClass(cert.certType)} flex-shrink-0`}>
                                                     {cert.certType}
                                                 </span>
-                                                <div>
-                                                    <p className="font-bold text-gray-900 text-lg">{cert.formationName}</p>
-                                                    <p className="text-sm text-gray-500 flex items-center gap-2">
-                                                        <Building2 className="w-4 h-4" />
-                                                        {cert.issuerName}
+                                                <div className="min-w-0">
+                                                    <p className="font-bold text-gray-900 text-base sm:text-lg truncate">{cert.formationName}</p>
+                                                    <p className="text-xs sm:text-sm text-gray-500 flex items-center gap-1 sm:gap-2">
+                                                        <Building2 className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
+                                                        <span className="truncate">{cert.issuerName}</span>
                                                     </p>
                                                 </div>
                                             </div>
-                                            <div className="flex items-center space-x-4">
-                                                <span className="text-sm text-gray-500 flex items-center gap-2">
-                                                    <Calendar className="w-4 h-4" />
+                                            <div className="flex items-center justify-between sm:justify-end space-x-3 sm:space-x-4">
+                                                <span className="text-xs sm:text-sm text-gray-500 flex items-center gap-1 sm:gap-2">
+                                                    <Calendar className="w-3 h-3 sm:w-4 sm:h-4" />
                                                     {cert.issuedAt.toLocaleDateString('fr-FR')}
                                                 </span>
                                                 <a
                                                     href={`/verify/${cert.id}`}
-                                                    className="btn-primary flex items-center space-x-2 px-4 py-2 text-sm"
+                                                    className="btn-primary flex items-center space-x-1 sm:space-x-2 px-3 sm:px-4 py-2 text-xs sm:text-sm"
                                                 >
-                                                    <ExternalLink className="w-4 h-4" />
+                                                    <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4" />
                                                     <span>Vérifier</span>
                                                 </a>
                                             </div>

@@ -424,51 +424,51 @@ export default function BatchCertificateIssuer({
             <div className="absolute inset-0" onClick={step < 3 ? handleClose : undefined} />
 
             <motion.div
-                className="relative bg-white rounded-3xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden flex flex-col"
+                className="relative bg-white rounded-2xl sm:rounded-3xl shadow-2xl w-full max-w-4xl max-h-[95vh] sm:max-h-[90vh] overflow-hidden flex flex-col"
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.9, opacity: 0 }}
             >
                 {/* Header */}
-                <div className="bg-gradient-primary px-6 py-5 flex items-center justify-between rounded-t-3xl">
-                    <div className="flex items-center space-x-3">
+                <div className="bg-gradient-primary px-4 sm:px-6 py-3 sm:py-5 flex items-center justify-between rounded-t-2xl sm:rounded-t-3xl">
+                    <div className="flex items-center space-x-2 sm:space-x-3">
                         <div className="bg-white/20 p-2 rounded-xl backdrop-blur-sm">
-                            <Users className="w-6 h-6 text-white" />
+                            <Users className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                         </div>
                         <div>
-                            <h3 className="text-xl font-bold text-white font-display">Émission en Lot</h3>
-                            <p className="text-white/80 text-sm">Importer un fichier CSV pour émettre plusieurs certificats</p>
+                            <h3 className="text-lg sm:text-xl font-bold text-white font-display">Émission en Lot</h3>
+                            <p className="text-white/80 text-xs sm:text-sm hidden sm:block">Importer un fichier CSV pour émettre plusieurs certificats</p>
                         </div>
                     </div>
                     {step < 3 && (
                         <button onClick={handleClose} className="p-2 hover:bg-white/20 rounded-xl transition-colors">
-                            <X className="w-6 h-6 text-white" />
+                            <X className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                         </button>
                     )}
                 </div>
 
                 {/* Progress Steps */}
-                <div className="px-6 py-4 border-b border-gray-100 bg-gray-50">
+                <div className="px-4 sm:px-6 py-3 sm:py-4 border-b border-gray-100 bg-gray-50">
                     <div className="flex items-center justify-between max-w-md mx-auto">
                         {['Upload', 'Vérification', 'Émission', 'Terminé'].map((label, idx) => (
                             <div key={label} className="flex items-center">
-                                <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${step > idx + 1 ? 'bg-emerald-500 text-white' :
+                                <div className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-xs sm:text-sm font-bold ${step > idx + 1 ? 'bg-emerald-500 text-white' :
                                     step === idx + 1 ? 'bg-[var(--color-primary-500)] text-white' :
                                         'bg-gray-200 text-gray-500'
                                     }`}>
-                                    {step > idx + 1 ? <CheckCircle className="w-5 h-5" /> : idx + 1}
+                                    {step > idx + 1 ? <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5" /> : idx + 1}
                                 </div>
-                                <span className={`ml-2 text-sm font-medium hidden sm:inline ${step === idx + 1 ? 'text-gray-900' : 'text-gray-500'}`}>
+                                <span className={`ml-1 sm:ml-2 text-xs sm:text-sm font-medium hidden sm:inline ${step === idx + 1 ? 'text-gray-900' : 'text-gray-500'}`}>
                                     {label}
                                 </span>
-                                {idx < 3 && <ChevronRight className="w-5 h-5 text-gray-300 mx-2 hidden sm:block" />}
+                                {idx < 3 && <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 text-gray-300 mx-1 sm:mx-2 hidden sm:block" />}
                             </div>
                         ))}
                     </div>
                 </div>
 
                 {/* Content */}
-                <div className="flex-1 overflow-y-auto p-6">
+                <div className="flex-1 overflow-y-auto p-4 sm:p-6">
                     <AnimatePresence mode="wait">
                         {/* Step 1: Upload */}
                         {step === 1 && (
@@ -747,7 +747,7 @@ export default function BatchCertificateIssuer({
 
                 {/* Footer Actions for Step 2 */}
                 {step === 2 && (
-                    <div className="px-6 py-4 border-t border-gray-100 bg-gray-50 flex gap-4">
+                    <div className="px-4 sm:px-6 py-3 sm:py-4 border-t border-gray-100 bg-gray-50 flex gap-3 sm:gap-4">
                         <button onClick={() => setStep(1)} className="btn-secondary flex-1">
                             Retour
                         </button>

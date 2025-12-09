@@ -1,5 +1,5 @@
 // src/pages/EmployerVerification.jsx
-import { Shield, Search, User, ArrowRight, Sparkles, Lock, Zap, ArrowLeft, Home, Award, CheckCircle, Github, Twitter, Mail, ExternalLink, Globe } from 'lucide-react';
+import { Shield, Search, User, ArrowRight, Sparkles, Lock, Zap, ArrowLeft, Home, Award, CheckCircle, Github, ExternalLink, Globe } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 function EmployerVerification({ onNavigateToVerify, onNavigateToProfile, onNavigateHome, onNavigateToEmployer, onConnectWallet }) {
@@ -20,8 +20,12 @@ function EmployerVerification({ onNavigateToVerify, onNavigateToProfile, onNavig
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.5 }}
                         >
-                            <div className="bg-gradient-primary p-2 sm:p-2.5 rounded-xl shadow-lg glow">
-                                <Shield className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
+                            <div className="p-1 sm:p-1.5">
+                                <img
+                                    src="/logo.png"
+                                    alt="CertiVerse Logo"
+                                    className="w-8 h-8 sm:w-10 sm:h-10 object-contain"
+                                />
                             </div>
                             <div>
                                 <h1 className="text-xl sm:text-2xl font-bold gradient-text font-display">
@@ -189,9 +193,9 @@ function EmployerVerification({ onNavigateToVerify, onNavigateToProfile, onNavig
                         <div className="md:col-span-2">
                             <div className="flex items-center space-x-3 mb-6">
                                 <div className="p-1.5">
-                                    <img 
-                                        src="/logo.png" 
-                                        alt="CertiVerse Logo" 
+                                    <img
+                                        src="/logo.png"
+                                        alt="CertiVerse Logo"
                                         className="w-10 h-10 object-contain"
                                     />
                                 </div>
@@ -205,14 +209,8 @@ function EmployerVerification({ onNavigateToVerify, onNavigateToProfile, onNavig
                             </p>
                             {/* Social Links */}
                             <div className="flex space-x-4">
-                                <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="p-3 bg-gray-800 hover:bg-gray-700 rounded-xl transition-all hover:scale-110 hover:shadow-lg">
+                                <a href="https://github.com/fida-ghourabi/certiverse.git" target="_blank" rel="noopener noreferrer" className="p-3 bg-gray-800 hover:bg-gray-700 rounded-xl transition-all hover:scale-110 hover:shadow-lg">
                                     <Github className="w-5 h-5 text-gray-400 hover:text-white" />
-                                </a>
-                                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="p-3 bg-gray-800 hover:bg-gray-700 rounded-xl transition-all hover:scale-110 hover:shadow-lg">
-                                    <Twitter className="w-5 h-5 text-gray-400 hover:text-white" />
-                                </a>
-                                <a href="mailto:contact@certiverse.app" className="p-3 bg-gray-800 hover:bg-gray-700 rounded-xl transition-all hover:scale-110 hover:shadow-lg">
-                                    <Mail className="w-5 h-5 text-gray-400 hover:text-white" />
                                 </a>
                             </div>
                         </div>
@@ -228,7 +226,7 @@ function EmployerVerification({ onNavigateToVerify, onNavigateToProfile, onNavig
                                     </button>
                                 </li>
                                 <li>
-                                    <button onClick={onConnectWallet} className="text-gray-400 hover:text-white transition-colors flex items-center space-x-2 group">
+                                    <button onClick={onNavigateHome} className="text-gray-400 hover:text-white transition-colors flex items-center space-x-2 group">
                                         <Lock className="w-4 h-4 text-[var(--color-primary-500)] group-hover:scale-110 transition-transform" />
                                         <span>Se connecter</span>
                                     </button>

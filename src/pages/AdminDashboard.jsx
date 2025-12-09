@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import {
   LogOut, Search, Building2, Award, TrendingUp, Plus, X, Copy, Check,
   AlertCircle, CheckCircle, Ban, ExternalLink, Loader2, Shield, Users,
-  Activity, GraduationCap, Briefcase, School, Filter
+  Activity, GraduationCap, Briefcase, School, Filter, LayoutDashboard
 } from 'lucide-react';
 import toast, { Toaster } from 'react-hot-toast';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -301,13 +301,22 @@ export default function AdminDashboard({ adminAddress, onDisconnect, contract })
       <header className="glass sticky top-0 z-40 border-b border-white/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4">
           <div className="flex items-center justify-between">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-            >
-              <h1 className="text-xl sm:text-2xl font-bold text-gray-900 font-display">Administration</h1>
-              <p className="text-xs sm:text-sm text-gray-500 hidden sm:block">Gestion des Organisations</p>
-            </motion.div>
+            <div className="flex items-center space-x-3 sm:space-x-4">
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                className="bg-gradient-primary p-2 sm:p-3 rounded-xl shadow-lg glow flex-shrink-0"
+              >
+                <LayoutDashboard className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+              >
+                <h1 className="text-xl sm:text-2xl font-bold text-gray-900 font-display">Administration</h1>
+                <p className="text-xs sm:text-sm text-gray-500 hidden sm:block">Gestion des Organisations</p>
+              </motion.div>
+            </div>
             <div className="flex items-center space-x-2 sm:space-x-4">
               <motion.div
                 className="hidden sm:block bg-gradient-primary px-3 sm:px-5 py-2 sm:py-2.5 rounded-xl cursor-pointer hover:shadow-lg transition-all glow-hover"

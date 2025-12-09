@@ -1,4 +1,4 @@
-# 🎓 CertiVerse - Plateforme Décentralisée de Certification Académique et Professionnelles
+# 🎓 CertiVerse - Plateforme Décentralisée de Certification Académique et Professionnelle
 
 <div align="center">
 
@@ -9,7 +9,7 @@
 [![IPFS](https://img.shields.io/badge/IPFS-Pinata-65C2CB?style=flat-square&logo=ipfs&logoColor=white)](https://www.pinata.cloud/)
 [![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](./LICENSE)
 
-**Une solution Web3 complète pour l'émission, la gestion et la vérification de certificats académiques / professionnelles sur la blockchain Ethereum.**
+**Une solution Web3 complète pour l'émission, la gestion et la vérification de certificats académiques / professionnels sur la blockchain Ethereum.**
 
 [🌐 Application](https://certiverse-six.vercel.app) • [🛠️ Installation](#-installation)
 
@@ -26,13 +26,15 @@
 - [Technologies Utilisées](#%EF%B8%8F-technologies-utilisées)
 - [Fonctionnalités](#-fonctionnalités)
 - [Smart Contract](#-smart-contract---fonctions-principales)
+- [Guide de Déploiement (Remix)](#-guide-de-déploiement-remix)
 - [Installation](#-installation)
 - [Configuration](#%EF%B8%8F-configuration)
 - [Utilisation](#-utilisation)
-- [Captures d'Écran](#-captures-décran)
+- [Démonstration](#-démonstration)
 - [Structure du Projet](#-structure-du-projet)
 - [Sécurité](#-sécurité)
-- [Auteur](#%E2%80%8D-auteur)
+- [Perspectives & Améliorations Futures](#-perspectives--améliorations-futures)
+- [Auteur](#-auteur)
   
 ---
 
@@ -482,6 +484,29 @@ event CertificateRevoked(uint256 indexed certId);
 
 ---
 
+## 🦊 Guide de Déploiement (Remix)
+
+Si vous souhaitez déployer votre propre version du smart contract :
+
+1.  **Copier le Code** : Ouvrez `Contract.sol` et copiez tout le contenu.
+2.  **Ouvrir Remix** : Allez sur [Remix IDE](https://remix.ethereum.org/).
+3.  **Créer le Fichier** : Créez un nouveau fichier `CertiVerse.sol` et collez-y le code.
+4.  **Compiler** : 
+    - Allez dans l'onglet "Solidity Compiler".
+    - Sélectionnez la version `0.8.20`.
+    - Cliquez sur "Compile CertiVerse.sol".
+5.  **Déployer** :
+    - Allez dans l'onglet "Deploy & Run Transactions".
+    - Sélectionnez "Injected Provider - MetaMask" comme environnement.
+    - Connectez votre MetaMask (réseau Sepolia).
+    - Cliquez sur "Deploy" et confirmez la transaction.
+6.  **Récupérer les Infos** :
+    - Une fois déployé, copiez l'adresse du contrat (section "Deployed Contracts").
+    - Copiez l'ABI (onglet "Solidity Compiler" > bouton "ABI" en bas).
+7.  **Mettre à jour la Configuration** :
+    - Remplacez l'adresse dans `.env` (`VITE_CONTRACT_ADDRESS`).
+    - Remplacez l'ABI dans `src/utils/ContractABI.json`.
+
 ## 🚀 Installation
 
 ### Prérequis
@@ -489,7 +514,7 @@ event CertificateRevoked(uint256 indexed certId);
 - **Node.js** v18+ 
 - **npm** ou **yarn**
 - **MetaMask** installé sur le navigateur
-- ETH de test Sepolia (via [Sepolia Faucet](https://sepoliafaucet.com/))
+- ETH de test Sepolia (via [Google Cloud Web3 Faucet](https://cloud.google.com/application/web3/faucet/ethereum/sepolia))
 
 ### Étapes d'Installation
 
@@ -531,6 +556,8 @@ VITE_PINATA_GATEWAY=ipfs.io
 VITE_PINATA_API_URL=https://api.pinata.cloud/pinning/pinFileToIPFS
 
 # Blockchain Configuration
+# Option A : Utiliser le contrat de démo (déjà déployé)
+# Option B : Utiliser votre propre contrat (remplacez par votre adresse)
 VITE_CONTRACT_ADDRESS=0xe6F2C948A7Ae5F28C8DFc7DEe81b113f6fE33904
 VITE_RPC_URL=https://ethereum-sepolia-rpc.publicnode.com
 VITE_ETHERSCAN_BASE_URL=https://sepolia.etherscan.io
@@ -541,6 +568,14 @@ VITE_IPFS_PUBLIC_GATEWAY=ipfs.io
 VITE_QR_API_URL=https://api.qrserver.com/v1/create-qr-code
 ```
 
+### Configuration du Smart Contract (ABI)
+
+Pour que le frontend puisse interagir avec votre contrat, vous devez mettre à jour l'ABI :
+
+1.  Copiez l'ABI depuis Remix (voir section Déploiement).
+2.  Ouvrez `src/utils/ContractABI.json`.
+3.  Remplacez tout le contenu par votre nouvel ABI (gardez le format JSON `[...]`).
+
 ### Obtenir votre Token Pinata JWT
 
 1. Créez un compte sur [Pinata](https://www.pinata.cloud/)
@@ -550,20 +585,30 @@ VITE_QR_API_URL=https://api.qrserver.com/v1/create-qr-code
 
 ### Configuration MetaMask
 
-1. Ouvrir MetaMask
-2. Ajouter le réseau Sepolia :
-   - **Nom du réseau** : Sepolia Test Network
-   - **URL RPC** : `https://ethereum-sepolia-rpc.publicnode.com`
-   - **ID de chaîne** : 11155111
-   - **Symbole** : ETH
-   - **Explorateur** : `https://sepolia.etherscan.io`
-3. Obtenir des ETH de test via [Sepolia Faucet](https://sepoliafaucet.com/)
+1. **Ouvrir MetaMask**.
+2. **Activer les réseaux de test** :
+   - Cliquez sur le sélecteur de réseau (en haut à gauche).
+   - Activez l'option **"Afficher les réseaux de test"** (Show test networks).
+   - Sélectionnez **Sepolia** dans la liste.
+3. Obtenir des ETH de test via [Google Cloud Web3 Faucet](https://cloud.google.com/application/web3/faucet/ethereum/sepolia)
 
 ---
 
 ## 📖 Utilisation
 
-### Pour l'Administrateur
+### ⚠️ Note Importante : Droits d'Accès
+
+> [!IMPORTANT]
+> **Le contrat de démo** (`0xe6F...`) appartient à l'administrateur initial (celui qui l'a déployé).
+> 
+> Si vous utilisez ce contrat :
+> - ❌ Vous **NE POURREZ PAS** vous connecter en tant qu'**Admin** (vous n'avez pas la clé privée).
+> - ❌ Vous **NE POURREZ PAS** ajouter d'organisation.
+> - ❌ Vous **NE POURREZ PAS** émettre de certificats.
+>
+> 👉 **Pour tester ces fonctionnalités (Admin, Organisation), vous DEVEZ déployer votre propre contrat** (voir section *Guide de Déploiement*).
+
+### Pour l'Administrateur (Sur votre propre contrat)
 
 1. Connecter le wallet administrateur
 2. Accéder au tableau de bord Admin
@@ -599,30 +644,11 @@ VITE_QR_API_URL=https://api.qrserver.com/v1/create-qr-code
 
 ---
 
-## 📸 Captures d'Écran
+## 🎥 Démonstration
 
-### Page d'Accueil
-Interface moderne avec connexion MetaMask et accès employeur.
+[![Démonstration Vidéo](https://img.youtube.com/vi/VIDEO_ID/0.jpg)](https://www.youtube.com/watch?v=VIDEO_ID)
 
-### Dashboard Admin
-- Statistiques globales
-- Liste des organisations
-- Formulaire d'ajout
-
-### Dashboard Organisation
-- Analytics détaillées
-- Émission individuelle et en lot
-- Gestion des certificats
-
-### Dashboard Étudiant
-- Portfolio de certificats
-- Téléchargement PDF
-- Historique des transactions
-
-### Vérification Employeur
-- Interface publique
-- Vérification par ID
-- Consultation de profil
+> *Cliquez sur l'image pour voir la vidéo de démonstration du parcours complet.*
 
 ---
 
@@ -655,11 +681,11 @@ certiverse/
 │   ├── App.css           # Styles spécifiques App
 │   ├── index.css         # Styles globaux + design system
 │   └── main.jsx          # Point d'entrée React
-├── Contract.txt          # Code source Solidity du smart contract
+├── Contract.sol          # Code source Solidity du smart contract
 ├── index.html            # Template HTML
 ├── package.json          # Dépendances npm
 ├── vite.config.js        # Configuration Vite
-├── vercel.json           # Configuration déploiement Vercel
+├── vercel.json           # Configuration déploiement Vercel 
 ├── .env                  # Variables d'environnement (non commitées)
 ├── .env.example          # Template de configuration
 ├── .gitignore            # Fichiers ignorés par Git
@@ -681,9 +707,30 @@ certiverse/
 
 ---
 
+## 🚀 Perspectives & Améliorations Futures
+
+Ce projet pose les fondations d'un écosystème éducatif décentralisé. Voici les pistes d'évolution envisagées :
+
+- **Soulbound Tokens (SBT)** : Migration vers le standard ERC-4671 pour rendre les diplômes strictement intransférables.
+- **Gouvernance DAO** : Implémentation d'une DAO pour permettre aux institutions de voter sur les mises à jour du protocole.
+- **Verifiable Credentials (W3C)** : Compatibilité avec les standards d'identité décentralisée (DID) pour une portabilité accrue.
+- **Support Multi-Chain** : Déploiement sur d'autres layer-2 (Polygon, Optimism) pour réduire les coûts de gaz.
+
+---
+
 ## 👨‍💻 Auteur
 
-**Projet développé dans le cadre du module Blockchain**
+**Projet réalisé dans le cadre du module Blockchain**
+
+### 👥 Équipe de Développement
+
+- **Fida Ghourabi**
+- **Mohamed Yassine Mathlouthi**
+- **Mohamed Said Chbinou**
+
+### 👨‍🏫 Supervision
+
+Projet supervisé par **Mme Nourhene Ellouze**
 
 ---
 

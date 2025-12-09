@@ -1,5 +1,5 @@
 // src/pages/HomePage.jsx
-import { Shield, Award, CheckCircle, Sparkles, Zap, Github, Twitter, Mail, ExternalLink, Globe, Lock } from 'lucide-react';
+import { Shield, Award, CheckCircle, Sparkles, Zap, Github, ExternalLink, Globe, Lock } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 function HomePage({ onConnectWallet, onNavigateToEmployer }) {
@@ -21,9 +21,9 @@ function HomePage({ onConnectWallet, onNavigateToEmployer }) {
               transition={{ duration: 0.5 }}
             >
               <div className="p-1 sm:p-1.5">
-                <img 
-                  src="/logo.png" 
-                  alt="CertiVerse Logo" 
+                <img
+                  src="/logo.png"
+                  alt="CertiVerse Logo"
                   className="w-8 h-8 sm:w-10 sm:h-10 object-contain"
                 />
               </div>
@@ -245,9 +245,9 @@ function HomePage({ onConnectWallet, onNavigateToEmployer }) {
             <div className="md:col-span-2">
               <div className="flex items-center space-x-3 mb-6">
                 <div className="p-1.5">
-                  <img 
-                    src="/logo.png" 
-                    alt="CertiVerse Logo" 
+                  <img
+                    src="/logo.png"
+                    alt="CertiVerse Logo"
                     className="w-10 h-10 object-contain"
                   />
                 </div>
@@ -261,14 +261,8 @@ function HomePage({ onConnectWallet, onNavigateToEmployer }) {
               </p>
               {/* Social Links */}
               <div className="flex space-x-4">
-                <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="p-3 bg-gray-800 hover:bg-gray-700 rounded-xl transition-all hover:scale-110 hover:shadow-lg">
+                <a href="https://github.com/fida-ghourabi/certiverse.git" target="_blank" rel="noopener noreferrer" className="p-3 bg-gray-800 hover:bg-gray-700 rounded-xl transition-all hover:scale-110 hover:shadow-lg">
                   <Github className="w-5 h-5 text-gray-400 hover:text-white" />
-                </a>
-                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="p-3 bg-gray-800 hover:bg-gray-700 rounded-xl transition-all hover:scale-110 hover:shadow-lg">
-                  <Twitter className="w-5 h-5 text-gray-400 hover:text-white" />
-                </a>
-                <a href="mailto:contact@certiverse.app" className="p-3 bg-gray-800 hover:bg-gray-700 rounded-xl transition-all hover:scale-110 hover:shadow-lg">
-                  <Mail className="w-5 h-5 text-gray-400 hover:text-white" />
                 </a>
               </div>
             </div>

@@ -1,0 +1,686 @@
+[
+    {
+        "inputs": [],
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "uint256",
+                "name": "certId",
+                "type": "uint256"
+            },
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "issuer",
+                "type": "address"
+            },
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "student",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "string",
+                "name": "formation",
+                "type": "string"
+            }
+        ],
+        "name": "CertificateIssued",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "uint256",
+                "name": "certId",
+                "type": "uint256"
+            }
+        ],
+        "name": "CertificateRevoked",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "org",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "string",
+                "name": "name",
+                "type": "string"
+            }
+        ],
+        "name": "OrganizationRegistered",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "org",
+                "type": "address"
+            }
+        ],
+        "name": "OrganizationRevoked",
+        "type": "event"
+    },
+    {
+        "inputs": [],
+        "name": "admin",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "certificateCounter",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "name": "certificates",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "id",
+                "type": "uint256"
+            },
+            {
+                "internalType": "address",
+                "name": "issuer",
+                "type": "address"
+            },
+            {
+                "internalType": "string",
+                "name": "issuerName",
+                "type": "string"
+            },
+            {
+                "internalType": "address",
+                "name": "student",
+                "type": "address"
+            },
+            {
+                "internalType": "string",
+                "name": "studentName",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "studentEmail",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "formationName",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "certType",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "ipfsHash",
+                "type": "string"
+            },
+            {
+                "internalType": "uint256",
+                "name": "issuedAt",
+                "type": "uint256"
+            },
+            {
+                "internalType": "bool",
+                "name": "revoked",
+                "type": "bool"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "getAllOrganizations",
+        "outputs": [
+            {
+                "internalType": "address[]",
+                "name": "addresses",
+                "type": "address[]"
+            },
+            {
+                "internalType": "string[]",
+                "name": "names",
+                "type": "string[]"
+            },
+            {
+                "internalType": "string[]",
+                "name": "emails",
+                "type": "string[]"
+            },
+            {
+                "internalType": "string[]",
+                "name": "types",
+                "type": "string[]"
+            },
+            {
+                "internalType": "bool[]",
+                "name": "actives",
+                "type": "bool[]"
+            },
+            {
+                "internalType": "uint256[]",
+                "name": "totalIssued",
+                "type": "uint256[]"
+            },
+            {
+                "internalType": "uint256[]",
+                "name": "totalRevoked",
+                "type": "uint256[]"
+            },
+            {
+                "internalType": "uint256[]",
+                "name": "uniqueStudents",
+                "type": "uint256[]"
+            },
+            {
+                "internalType": "uint256[]",
+                "name": "registeredAt",
+                "type": "uint256[]"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "certId",
+                "type": "uint256"
+            }
+        ],
+        "name": "getCertificate",
+        "outputs": [
+            {
+                "components": [
+                    {
+                        "internalType": "uint256",
+                        "name": "id",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "issuer",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "string",
+                        "name": "issuerName",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "student",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "string",
+                        "name": "studentName",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "string",
+                        "name": "studentEmail",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "string",
+                        "name": "formationName",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "string",
+                        "name": "certType",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "string",
+                        "name": "ipfsHash",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "issuedAt",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "revoked",
+                        "type": "bool"
+                    }
+                ],
+                "internalType": "struct CertiVerse.Certificate",
+                "name": "",
+                "type": "tuple"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "getGlobalStats",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "totalOrgs",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "activeOrgs",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "totalCerts",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "revokedCerts",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "org",
+                "type": "address"
+            }
+        ],
+        "name": "getOrganizationCertificates",
+        "outputs": [
+            {
+                "components": [
+                    {
+                        "internalType": "uint256",
+                        "name": "id",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "issuer",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "string",
+                        "name": "issuerName",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "student",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "string",
+                        "name": "studentName",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "string",
+                        "name": "studentEmail",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "string",
+                        "name": "formationName",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "string",
+                        "name": "certType",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "string",
+                        "name": "ipfsHash",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "issuedAt",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "revoked",
+                        "type": "bool"
+                    }
+                ],
+                "internalType": "struct CertiVerse.Certificate[]",
+                "name": "",
+                "type": "tuple[]"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "student",
+                "type": "address"
+            }
+        ],
+        "name": "getStudentCertificates",
+        "outputs": [
+            {
+                "components": [
+                    {
+                        "internalType": "uint256",
+                        "name": "id",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "issuer",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "string",
+                        "name": "issuerName",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "student",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "string",
+                        "name": "studentName",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "string",
+                        "name": "studentEmail",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "string",
+                        "name": "formationName",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "string",
+                        "name": "certType",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "string",
+                        "name": "ipfsHash",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "issuedAt",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "revoked",
+                        "type": "bool"
+                    }
+                ],
+                "internalType": "struct CertiVerse.Certificate[]",
+                "name": "",
+                "type": "tuple[]"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "student",
+                "type": "address"
+            },
+            {
+                "internalType": "string",
+                "name": "studentName",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "studentEmail",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "formationName",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "certType",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "ipfsHash",
+                "type": "string"
+            },
+            {
+                "internalType": "uint256",
+                "name": "issuedAt",
+                "type": "uint256"
+            }
+        ],
+        "name": "issueCertificate",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "name": "organizationList",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "name": "organizations",
+        "outputs": [
+            {
+                "internalType": "string",
+                "name": "name",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "email",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "orgType",
+                "type": "string"
+            },
+            {
+                "internalType": "bool",
+                "name": "isActive",
+                "type": "bool"
+            },
+            {
+                "internalType": "uint256",
+                "name": "registeredAt",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "totalIssued",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "totalRevoked",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "uniqueStudents",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "orgAddress",
+                "type": "address"
+            },
+            {
+                "internalType": "string",
+                "name": "name",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "email",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "orgType",
+                "type": "string"
+            },
+            {
+                "internalType": "uint256",
+                "name": "registeredAt",
+                "type": "uint256"
+            }
+        ],
+        "name": "registerOrganization",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "certId",
+                "type": "uint256"
+            }
+        ],
+        "name": "revokeCertificate",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "orgAddress",
+                "type": "address"
+            }
+        ],
+        "name": "revokeOrganization",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "name": "studentCertificates",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    }
+]

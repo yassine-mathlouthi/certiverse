@@ -12,8 +12,6 @@ export const Web3Provider = ({ children }) => {
   const [contract, setContract] = useState(null);
   const [loading, setLoading] = useState(false);
 
- // const ADMIN_ADDRESS = "0x5255b98f4e1401e91c83d1e07b755077c1c9341a"; // Ton adresse admin
-
   const connectWallet = async () => {
     try {
       setLoading(true);
@@ -48,10 +46,10 @@ export const Web3Provider = ({ children }) => {
           uniqueStudents: Number(org.uniqueStudents)
         });
       } else { // nahi l else
-      // IMPORTANT : Réinitialiser si pas active
-      setIsRegisteredOrg(false);
-      setOrgData(null);
-    }
+        // IMPORTANT : Réinitialiser si pas active
+        setIsRegisteredOrg(false);
+        setOrgData(null);
+      }
 
       setLoading(false);
     } catch (err) {

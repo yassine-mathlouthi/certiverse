@@ -112,8 +112,12 @@ function StudentProfileViewer({ onBack }) {
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.5 }}
                         >
-                            <div className="bg-gradient-primary p-2 sm:p-2.5 rounded-xl shadow-lg glow">
-                                <User className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
+                            <div className="p-1 sm:p-1.5">
+                                <img
+                                    src="/logo.png"
+                                    alt="CertiVerse Logo"
+                                    className="w-8 h-8 sm:w-10 sm:h-10 object-contain"
+                                />
                             </div>
                             <div>
                                 <h1 className="text-xl sm:text-2xl font-bold gradient-text font-display">

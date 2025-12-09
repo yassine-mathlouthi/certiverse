@@ -244,8 +244,12 @@ function HomePage({ onConnectWallet, onNavigateToEmployer }) {
             {/* Brand Column */}
             <div className="md:col-span-2">
               <div className="flex items-center space-x-3 mb-6">
-                <div className="bg-gradient-primary p-3 rounded-xl shadow-lg">
-                  <Shield className="w-7 h-7 text-white" />
+                <div className="p-1.5">
+                  <img 
+                    src="/logo.png" 
+                    alt="CertiVerse Logo" 
+                    className="w-10 h-10 object-contain"
+                  />
                 </div>
                 <div>
                   <span className="text-2xl font-bold text-white font-display">CertiVerse</span>

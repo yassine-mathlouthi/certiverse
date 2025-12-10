@@ -554,6 +554,7 @@ export default function OrganizationDashboard({
   const copyToClipboard = (text, key = 'generic') => {
     navigator.clipboard.writeText(text);
     setCopiedId(key);
+    toast.success('Copié dans le presse-papiers !');
     setTimeout(() => setCopiedId(null), 2000);
   };
 
@@ -637,7 +638,12 @@ export default function OrganizationDashboard({
               <div className="hidden md:flex items-center space-x-3 bg-gradient-to-r from-blue-600 to-cyan-600 px-3 sm:px-5 py-2 sm:py-3 rounded-xl text-white font-medium">
                 <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
                 <span className="font-mono text-sm">{truncateAddress(orgAddress)}</span>
-                <button onClick={() => copyToClipboard(orgAddress, 'org')} className="ml-2 hover:bg-white/20 p-1.5 rounded transition">
+                <button
+                  onClick={() => copyToClipboard(orgAddress, 'org')}
+                  className="ml-2 hover:bg-white/20 p-1.5 rounded transition"
+                  aria-label="Copier l'adresse de l'organisation"
+                  title="Copier l'adresse"
+                >
                   {copiedId === 'org' ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                 </button>
               </div>

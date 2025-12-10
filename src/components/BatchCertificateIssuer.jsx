@@ -510,13 +510,16 @@ export default function BatchCertificateIssuer({
 
                                 <div className="mt-6 p-4 bg-gray-50 rounded-xl">
                                     <h5 className="font-semibold text-gray-900 mb-2">Format CSV requis :</h5>
-                                    <p className="text-sm text-gray-600 mb-3">
-                                        Le fichier doit contenir les colonnes : <code className="bg-gray-200 px-1 rounded">studentAddress</code>,
-                                        <code className="bg-gray-200 px-1 rounded ml-1">studentName</code>,
-                                        <code className="bg-gray-200 px-1 rounded ml-1">studentEmail</code>,
-                                        <code className="bg-gray-200 px-1 rounded ml-1">formationName</code>,
-                                        <code className="bg-gray-200 px-1 rounded ml-1">certType</code>
+                                    <p className="text-sm text-gray-600 mb-2">
+                                        Le fichier doit contenir les colonnes suivantes :
                                     </p>
+                                    <ul className="text-sm text-gray-600 mb-3 ml-4 list-disc space-y-1">
+                                        <li><code className="bg-gray-200 px-1 rounded text-xs break-all">studentAddress</code></li>
+                                        <li><code className="bg-gray-200 px-1 rounded text-xs break-all">studentName</code></li>
+                                        <li><code className="bg-gray-200 px-1 rounded text-xs break-all">studentEmail</code></li>
+                                        <li><code className="bg-gray-200 px-1 rounded text-xs break-all">formationName</code></li>
+                                        <li><code className="bg-gray-200 px-1 rounded text-xs break-all">certType</code></li>
+                                    </ul>
                                     <button
                                         onClick={downloadTemplate}
                                         className="text-[var(--color-primary-600)] hover:underline text-sm font-medium flex items-center gap-1"

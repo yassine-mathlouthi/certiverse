@@ -82,6 +82,7 @@ export default function AdminDashboard({ adminAddress, onDisconnect, contract })
   const copyToClipboard = (text, id) => {
     navigator.clipboard.writeText(text);
     setCopiedAddress(id);
+    toast.success('Copié dans le presse-papiers !');
     setTimeout(() => setCopiedAddress(null), 2000);
   };
 
@@ -326,6 +327,8 @@ export default function AdminDashboard({ adminAddress, onDisconnect, contract })
                 <button
                   onClick={() => copyToClipboard(adminAddress, 'admin')}
                   className="flex items-center space-x-2 text-white"
+                  aria-label="Copier l'adresse de l'administrateur"
+                  title="Copier l'adresse"
                 >
                   <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
                   <span className="text-sm font-mono">{truncateAddress(adminAddress)}</span>
@@ -349,7 +352,7 @@ export default function AdminDashboard({ adminAddress, onDisconnect, contract })
             </div>
           </div>
         </div>
-      </header>
+      </header >
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8 relative z-10">
         {/* Stats */}
@@ -540,6 +543,8 @@ export default function AdminDashboard({ adminAddress, onDisconnect, contract })
                               <button
                                 onClick={() => copyToClipboard(org.address, org.address)}
                                 className="flex items-center space-x-2 font-mono text-sm text-gray-700 hover:text-[var(--color-primary-600)] transition-colors"
+                                aria-label="Copier l'adresse de l'organisation"
+                                title="Copier l'adresse"
                               >
                                 <span>{truncateAddress(org.address)}</span>
                                 {copiedAddress === org.address ? <Check className="w-4 h-4 text-green-600" /> : <Copy className="w-4 h-4" />}
@@ -556,14 +561,14 @@ export default function AdminDashboard({ adminAddress, onDisconnect, contract })
                             </div>
                           </td>
                           <td>
-                            <div>
-                              <p className="font-semibold text-gray-900">{org.name}</p>
-                              <p className="text-sm text-gray-500">{org.email}</p>
+                            <div className="min-w-0">
+                              <p className="font-semibold text-gray-900 truncate">{org.name}</p>
+                              <p className="text-sm text-gray-500 truncate">{org.email}</p>
                               <p className="text-xs text-gray-400 mt-1">Ajouté le {org.dateAdded}</p>
                             </div>
                           </td>
                           <td>
-                            <span className={`badge ${typeConfig.badge}`}>
+                            <span className={`badge ${typeConfig.badge} text-xs whitespace-normal leading-tight`}>
                               {org.type}
                             </span>
                           </td>
@@ -824,6 +829,6 @@ export default function AdminDashboard({ adminAddress, onDisconnect, contract })
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </div >
   );
 }

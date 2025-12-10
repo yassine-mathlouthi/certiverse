@@ -337,7 +337,7 @@ export default function StudentDashboard({ studentAddress, onDisconnect, contrac
   const copyTxHash = (txHash) => {
     navigator.clipboard.writeText(txHash);
     setCopiedTxHash(txHash);
-    toast.success('Transaction hash copied!');
+    toast.success('Hash de transaction copié !');
     setTimeout(() => setCopiedTxHash(''), 2000);
   };
 

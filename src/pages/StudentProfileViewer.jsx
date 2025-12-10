@@ -400,41 +400,41 @@ function StudentProfileViewer({ onBack }) {
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: 0.7 }}
                                 >
-                                    <h3 className="text-xl font-bold text-gray-900 mb-4 font-display flex items-center gap-3">
-                                        <AlertCircle className="w-6 h-6 text-red-500" />
+                                    <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6 font-display flex items-center gap-2 sm:gap-3">
+                                        <AlertCircle className="w-6 h-6 sm:w-7 sm:h-7 text-red-500" />
                                         Certificats Révoqués
                                     </h3>
                                     <div className="space-y-3">
                                         {revokedCertificates.map((cert, index) => (
                                             <motion.div
                                                 key={cert.id}
-                                                className="bg-red-50 rounded-2xl p-5 flex items-center justify-between border-2 border-red-200 hover:border-red-400 transition-all"
+                                                className="card p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 bg-red-50 border-2 border-red-200 hover:border-red-400 transition-all"
                                                 initial={{ opacity: 0, x: -20 }}
                                                 animate={{ opacity: 1, x: 0 }}
                                                 transition={{ delay: 0.1 * index }}
                                             >
-                                                <div className="flex items-center space-x-4 flex-1">
-                                                    <span className={`badge ${getCertTypeBadgeClass(cert.certType)}`}>
+                                                <div className="flex items-start sm:items-center space-x-3 sm:space-x-4 flex-1 min-w-0">
+                                                    <span className={`badge ${getCertTypeBadgeClass(cert.certType)} flex-shrink-0`}>
                                                         {cert.certType}
                                                     </span>
-                                                    <div>
-                                                        <p className="font-bold text-gray-900">{cert.formationName}</p>
-                                                        <p className="text-sm text-gray-500 flex items-center gap-2">
-                                                            <Building2 className="w-4 h-4" />
-                                                            {cert.issuerName}
+                                                    <div className="min-w-0">
+                                                        <p className="font-bold text-gray-900 text-base sm:text-lg truncate">{cert.formationName}</p>
+                                                        <p className="text-xs sm:text-sm text-gray-500 flex items-center gap-1 sm:gap-2">
+                                                            <Building2 className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
+                                                            <span className="truncate">{cert.issuerName}</span>
                                                         </p>
                                                     </div>
                                                 </div>
-                                                <div className="flex items-center space-x-4">
-                                                    <span className="text-sm text-gray-500 flex items-center gap-2">
-                                                        <Calendar className="w-4 h-4" />
+                                                <div className="flex items-center justify-between sm:justify-end space-x-3 sm:space-x-4">
+                                                    <span className="text-xs sm:text-sm text-gray-500 flex items-center gap-1 sm:gap-2">
+                                                        <Calendar className="w-3 h-3 sm:w-4 sm:h-4" />
                                                         {cert.issuedAt.toLocaleDateString('fr-FR')}
                                                     </span>
                                                     <a
                                                         href={`/verify/${cert.id}`}
-                                                        className="flex items-center space-x-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-xl font-medium transition-all"
+                                                        className="flex items-center space-x-1 sm:space-x-2 px-3 sm:px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-xl font-medium transition-all text-xs sm:text-sm"
                                                     >
-                                                        <ExternalLink className="w-4 h-4" />
+                                                        <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4" />
                                                         <span>Vérifier</span>
                                                     </a>
                                                 </div>

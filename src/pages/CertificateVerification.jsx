@@ -10,7 +10,7 @@ function CertificateVerification({ onBack }) {
     const [loading, setLoading] = useState(false);
     const [certificate, setCertificate] = useState(null);
     const [error, setError] = useState('');
-    const [copied, setCopied] = useState(false);
+    const [copiedItem, setCopiedItem] = useState(null);
 
     // Check URL for certificate ID on mount
     useEffect(() => {
@@ -153,11 +153,11 @@ function CertificateVerification({ onBack }) {
         handleVerifyWithId(certId);
     };
 
-    const copyToClipboard = (text) => {
+    const copyToClipboard = (text, itemId) => {
         navigator.clipboard.writeText(text);
-        setCopied(true);
+        setCopiedItem(itemId);
         toast.success('Copié dans le presse-papiers !');
-        setTimeout(() => setCopied(false), 2000);
+        setTimeout(() => setCopiedItem(null), 2000);
     };
 
     const getBlockExplorerUrl = (address) => {
@@ -445,10 +445,12 @@ function CertificateVerification({ onBack }) {
                                                 <div className="flex items-center space-x-2">
                                                     <code className="text-xs sm:text-sm font-mono text-gray-900 bg-white px-2 py-1 rounded-lg truncate max-w-[120px] sm:max-w-none">{certificate.transactionHash.slice(0, 10)}...{certificate.transactionHash.slice(-8)}</code>
                                                     <button
-                                                        onClick={() => copyToClipboard(certificate.transactionHash)}
+                                                        onClick={() => copyToClipboard(certificate.transactionHash, 'txHash')}
                                                         className="p-2 hover:bg-[var(--color-primary-100)] rounded-lg transition-colors"
+                                                        aria-label="Copier le hash de transaction"
+                                                        title="Copier le hash de transaction"
                                                     >
-                                                        {copied ? <Check className="w-4 h-4 text-green-600" /> : <Copy className="w-4 h-4 text-gray-600" />}
+                                                        {copiedItem === 'txHash' ? <Check className="w-4 h-4 text-green-600" /> : <Copy className="w-4 h-4 text-gray-600" />}
                                                     </button>
                                                     <a
                                                         href={`https://sepolia.etherscan.io/tx/${certificate.transactionHash}`}
@@ -470,10 +472,12 @@ function CertificateVerification({ onBack }) {
                                                 <div className="flex items-center space-x-2">
                                                     <code className="text-xs sm:text-sm font-mono text-gray-900 bg-white px-2 py-1 rounded-lg truncate max-w-[120px] sm:max-w-none">{certificate.revokeTxHash.slice(0, 10)}...{certificate.revokeTxHash.slice(-8)}</code>
                                                     <button
-                                                        onClick={() => copyToClipboard(certificate.revokeTxHash)}
+                                                        onClick={() => copyToClipboard(certificate.revokeTxHash, 'revokeTxHash')}
                                                         className="p-2 hover:bg-red-100 rounded-lg transition-colors"
+                                                        aria-label="Copier le hash de révocation"
+                                                        title="Copier le hash de révocation"
                                                     >
-                                                        {copied ? <Check className="w-4 h-4 text-green-600" /> : <Copy className="w-4 h-4 text-gray-600" />}
+                                                        {copiedItem === 'revokeTxHash' ? <Check className="w-4 h-4 text-green-600" /> : <Copy className="w-4 h-4 text-gray-600" />}
                                                     </button>
                                                     <a
                                                         href={`https://sepolia.etherscan.io/tx/${certificate.revokeTxHash}`}
@@ -493,10 +497,12 @@ function CertificateVerification({ onBack }) {
                                             <div className="flex items-center space-x-2">
                                                 <code className="text-xs sm:text-sm font-mono bg-white px-2 py-1 rounded-lg truncate max-w-[120px] sm:max-w-none">{certificate.student.slice(0, 10)}...{certificate.student.slice(-8)}</code>
                                                 <button
-                                                    onClick={() => copyToClipboard(certificate.student)}
+                                                    onClick={() => copyToClipboard(certificate.student, 'student')}
                                                     className="p-2 hover:bg-gray-200 rounded-lg transition-colors"
+                                                    aria-label="Copier l'adresse de l'étudiant"
+                                                    title="Copier l'adresse de l'étudiant"
                                                 >
-                                                    {copied ? <Check className="w-4 h-4 text-green-600" /> : <Copy className="w-4 h-4 text-gray-600" />}
+                                                    {copiedItem === 'student' ? <Check className="w-4 h-4 text-green-600" /> : <Copy className="w-4 h-4 text-gray-600" />}
                                                 </button>
                                                 <a
                                                     href={getBlockExplorerUrl(certificate.student)}
@@ -513,6 +519,14 @@ function CertificateVerification({ onBack }) {
                                             <span className="text-xs sm:text-sm text-gray-600 font-semibold">Portefeuille Émetteur</span>
                                             <div className="flex items-center space-x-2">
                                                 <code className="text-xs sm:text-sm font-mono bg-white px-2 py-1 rounded-lg truncate max-w-[120px] sm:max-w-none">{certificate.issuer.slice(0, 10)}...{certificate.issuer.slice(-8)}</code>
+                                                <button
+                                                    onClick={() => copyToClipboard(certificate.issuer, 'issuer')}
+                                                    className="p-2 hover:bg-gray-200 rounded-lg transition-colors"
+                                                    aria-label="Copier l'adresse de l'émetteur"
+                                                    title="Copier l'adresse de l'émetteur"
+                                                >
+                                                    {copiedItem === 'issuer' ? <Check className="w-4 h-4 text-green-600" /> : <Copy className="w-4 h-4 text-gray-600" />}
+                                                </button>
                                                 <a
                                                     href={getBlockExplorerUrl(certificate.issuer)}
                                                     target="_blank"
@@ -531,10 +545,12 @@ function CertificateVerification({ onBack }) {
                                                 <div className="flex items-center space-x-2">
                                                     <code className="text-xs sm:text-sm font-mono bg-white px-2 py-1 rounded-lg truncate max-w-[120px] sm:max-w-none">{certificate.ipfsHash.replace('ipfs://', '').slice(0, 10)}...{certificate.ipfsHash.replace('ipfs://', '').slice(-8)}</code>
                                                     <button
-                                                        onClick={() => copyToClipboard(certificate.ipfsHash.replace('ipfs://', ''))}
+                                                        onClick={() => copyToClipboard(certificate.ipfsHash.replace('ipfs://', ''), 'ipfs')}
                                                         className="p-2 hover:bg-purple-100 rounded-lg transition-colors"
+                                                        aria-label="Copier le hash IPFS"
+                                                        title="Copier le hash IPFS"
                                                     >
-                                                        {copied ? <Check className="w-4 h-4 text-green-600" /> : <Copy className="w-4 h-4 text-gray-600" />}
+                                                        {copiedItem === 'ipfs' ? <Check className="w-4 h-4 text-green-600" /> : <Copy className="w-4 h-4 text-gray-600" />}
                                                     </button>
                                                     <a
                                                         href={`https://ipfs.io/ipfs/${certificate.ipfsHash.replace('ipfs://', '')}`}

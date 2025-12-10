@@ -30,7 +30,7 @@ function AddToLinkedInButton({ certificate }) {
         linkedInUrl.searchParams.append('certId', `CERT-${issueYear}-00${certificate.certId || certificate.id}`);
 
         // Show success message
-        toast.success('Opening LinkedIn - Add your blockchain certificate!', {
+        toast.success('Opening LinkedIn - Add your certificate!', {
             duration: 4000,
             icon: '🎓'
         });

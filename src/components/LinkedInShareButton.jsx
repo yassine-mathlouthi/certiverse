@@ -17,8 +17,9 @@ function AddToLinkedInButton({ certificate }) {
 
         const linkedInUrl = new URL('https://www.linkedin.com/profile/add');
 
-        linkedInUrl.searchParams.append('startTask', 'CERTIFICATION_NAME');
+        linkedInUrl.searchParams.append('startTask', 'CERT_ADD');
         linkedInUrl.searchParams.append('name', certificate.formationName);
+        linkedInUrl.searchParams.append('authority', certificate.issuerName);
         linkedInUrl.searchParams.append('organizationName', certificate.issuerName);
 
         linkedInUrl.searchParams.append('issueYear', issueYear.toString());
